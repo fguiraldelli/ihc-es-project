@@ -13,6 +13,7 @@
     <string name="permission_rationale">"Contacts permissions are needed for providing email
         completions."
     </string>
+    <string name="facebook_app_id">1421246887903651</string>
     <string name="title_activity_home">Início</string>
     <string name="btn_pesquisar_label">Pesquisar</string>
     <string name="btn_anunciar">Anunciar</string>
