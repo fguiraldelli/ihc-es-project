@@ -31,6 +31,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.facebook.FacebookSdk;
+import com.facebook.appevents.AppEventsLogger;
 
 import static android.Manifest.permission.READ_CONTACTS;
 
