@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
+import com.facebook.AccessToken;
 import com.facebook.CallbackManager;
 import com.facebook.FacebookCallback;
 import com.facebook.FacebookException;
@@ -22,6 +23,12 @@ public class MainActivity extends AppCompatActivity {
         FacebookSdk.sdkInitialize(getApplicationContext());
         AppEventsLogger.activateApp(this.getApplication());
         setContentView(R.layout.activity_main);
+
+        AccessToken token = AccessToken.getCurrentAccessToken();
+
+        if (token != null && !token.isExpired()) {
+            startActivity(new Intent(MainActivity.this, HomeActivity.class));
+        }
 
         LoginButton loginButton = (LoginButton)findViewById(R.id.login_button);
         callbackManager = CallbackManager.Factory.create();
@@ -43,8 +50,6 @@ public class MainActivity extends AppCompatActivity {
                 throw exception;
             }
         });
-
-
     }
 
     @Override
