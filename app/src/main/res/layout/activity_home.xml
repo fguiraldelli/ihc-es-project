@@ -23,7 +23,7 @@
                 android:layout_height="wrap_content"
                 android:id="@+id/tv_termos_pesquisa"
                 android:layout_weight="1"
-                android:hint="@string/tv_termos_pesquisa_hint" />
+                android:hint="@string/tv_search_terms_hint" />
 
             <Button
                 android:layout_width="50dp"
@@ -38,14 +38,39 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/btn_anunciar"
-            android:text="@string/btn_anunciar" />
+            android:text="@string/btn_advertise" />
 
         <Button
-            android:text="@string/btn_meus_anuncios"
+            android:text="@string/btn_my_ads"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/btn_meus_anuncios"
             android:visibility="invisible" />
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="left|center_vertical">
+
+            <TextView
+                android:text="@string/tv_my_points_label"
+                android:layout_width="173dp"
+                android:layout_height="wrap_content"
+                android:id="@+id/tv_pontos"
+                android:visibility="invisible"
+                android:textSize="18sp"
+                android:elevation="1dp" />
+
+            <ImageView
+                android:layout_width="@dimen/iv_classification"
+                android:layout_height="@dimen/iv_classification"
+                app:srcCompat="@drawable/ic_mood_black_24dp"
+                android:id="@+id/imageView"
+                android:elevation="1dp"
+                android:visibility="invisible" />
+
+        </LinearLayout>
 
     </LinearLayout>
 </android.support.design.widget.CoordinatorLayout>
