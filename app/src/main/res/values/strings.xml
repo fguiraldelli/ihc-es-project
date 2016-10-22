@@ -5,7 +5,13 @@
     <string name="facebook_app_id">1421246887903651</string>
     <string name="title_activity_home">Início</string>
     <string name="btn_pesquisar_label">Pesquisar</string>
-    <string name="btn_anunciar">Anunciar</string>
     <string name="btn_meus_anuncios">Meus Anúncios</string>
     <string name="tv_termos_pesquisa_hint">O que está procurando?</string>
+
+    <!--Strings related do advertise-->
+    <string name="btn_advertise">Anunciar</string>
+    <string name="btn_cancel">cancelar</string>
+    <string name="input_description">Descriçao</string>
+    <string name="input_price">R$</string>
+    <string name="input_title">Titulo</string>
 </resources>
