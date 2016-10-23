@@ -28,7 +28,8 @@
             </intent-filter>
         </activity>
         <activity android:name=".HomeActivity" />
-        <activity android:name=".AdvertiseActivity"></activity>
+        <activity android:name=".AdvertiseActivity" />
+        <activity android:name=".MyAdsList"></activity>
     </application>
 
 </manifest>
