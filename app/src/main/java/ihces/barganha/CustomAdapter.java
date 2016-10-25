@@ -32,7 +32,7 @@ public class CustomAdapter extends BaseAdapter{
 
     @Override
     public Object getItem(int i) {
-        return null;
+        return this.titles[i];
     }
 
     @Override
