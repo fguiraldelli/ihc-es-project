@@ -10,4 +10,11 @@
     <string name="tv_search_terms_hint">O que está procurando?</string>
     <string name="tv_my_points_label">Minha classificação:</string>
     <string name="tv_search_terms_label">Resultados da pesquisa por:</string>
+
+    <!--Strings related to advertise-->
+    <string name="btn_cancel">cancelar</string>
+    <string name="input_description">Descriçao</string>
+    <string name="input_price">R$</string>
+    <string name="input_title">Titulo</string>
+    <string name="tv_search_terms_default">(nenhum termo definido)</string>
 </resources>

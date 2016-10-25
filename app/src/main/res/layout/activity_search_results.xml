@@ -22,7 +22,7 @@
             android:id="@+id/tv_search_terms_label" />
 
         <TextView
-            android:text='"guarda roupa 6 portas"'
+            android:text="@string/tv_search_terms_default"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/tv_search_terms"

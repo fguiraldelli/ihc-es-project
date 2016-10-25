@@ -21,14 +21,14 @@
             <AutoCompleteTextView
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:id="@+id/tv_termos_pesquisa"
+                android:id="@+id/tv_search_terms"
                 android:layout_weight="1"
                 android:hint="@string/tv_search_terms_hint" />
 
             <Button
                 android:layout_width="50dp"
                 android:layout_height="wrap_content"
-                android:id="@+id/btn_pesquisar"
+                android:id="@+id/btn_search"
                 android:background="@drawable/btn_pesquisar_icon"
                 style="@android:style/Widget.Holo.Light.Button" />
 
@@ -37,14 +37,14 @@
         <Button
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/btn_anunciar"
+            android:id="@+id/btn_advertise"
             android:text="@string/btn_advertise" />
 
         <Button
             android:text="@string/btn_my_ads"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/btn_meus_anuncios"
+            android:id="@+id/btn_my_ads"
             android:visibility="invisible" />
 
         <LinearLayout
@@ -66,7 +66,7 @@
                 android:layout_width="@dimen/iv_classification"
                 android:layout_height="@dimen/iv_classification"
                 app:srcCompat="@drawable/ic_mood_black_24dp"
-                android:id="@+id/imageView"
+                android:id="@+id/iv_my_points"
                 android:elevation="1dp"
                 android:visibility="invisible" />
 

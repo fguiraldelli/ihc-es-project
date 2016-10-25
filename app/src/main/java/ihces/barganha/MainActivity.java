@@ -24,8 +24,8 @@ public class MainActivity extends AppCompatActivity {
         AppEventsLogger.activateApp(this.getApplication());
         setContentView(R.layout.activity_main);
 
-        AccessToken token = AccessToken.getCurrentAccessToken();
-
+        //AccessToken token = AccessToken.getCurrentAccessToken();
+        AccessToken token = null;
         if (token != null && !token.isExpired()) {
             startActivity(new Intent(MainActivity.this, HomeActivity.class));
         }
