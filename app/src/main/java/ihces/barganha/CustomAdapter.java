@@ -10,6 +10,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.math.BigDecimal;
+import java.text.DecimalFormat;
 
 public class CustomAdapter extends BaseAdapter{
 
@@ -17,6 +18,7 @@ public class CustomAdapter extends BaseAdapter{
     private final BigDecimal[] prices;
     private final String[] description;
     private LayoutInflater adsInflater;
+    private DecimalFormat decimalFormatter = new DecimalFormat("#0.##");
 
     public CustomAdapter(Context context, String[] titles, String[] description,BigDecimal[] prices) {
         this.titles = titles;
@@ -43,7 +45,13 @@ public class CustomAdapter extends BaseAdapter{
     @NonNull
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        View customView = adsInflater.inflate(R.layout.custom_row, parent, false);
+        View customView;
+
+        if( convertView == null) {
+            customView = adsInflater.inflate(R.layout.custom_row, parent, false);
+        } else {
+            customView = convertView;
+        }
 
         TextView titleText = (TextView) customView.findViewById(R.id.row_title);
         TextView priceText = (TextView) customView.findViewById(R.id.row_price);
@@ -51,7 +59,7 @@ public class CustomAdapter extends BaseAdapter{
         ImageView itemImage = (ImageView) customView.findViewById(R.id.row_image);
 
         titleText.setText(titles[position]);
-        priceText.setText((CharSequence) prices[position]);
+        priceText.setText(decimalFormatter.format(prices[position]));
         descriptionText.setText(description[position]);
         itemImage.setImageResource(R.drawable.com_facebook_profile_picture_blank_square);
 

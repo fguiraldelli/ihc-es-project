@@ -34,6 +34,21 @@
 
         </LinearLayout>
 
+        <TableRow
+            android:layout_width="match_parent"
+            android:background="@android:color/holo_blue_dark"
+            android:layout_margin="10dp"
+            android:layout_height="1dp" />
+
+        <TextView
+            android:text="@string/tv_selling_label"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/tv_label_selling"
+            android:textAllCaps="false"
+            android:textStyle="normal|italic"
+            android:layout_marginLeft="4dp" />
+
         <Button
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

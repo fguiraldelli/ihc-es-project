@@ -10,6 +10,8 @@
     <string name="tv_search_terms_hint">O que está procurando?</string>
     <string name="tv_my_points_label">Minha classificação:</string>
     <string name="tv_search_terms_label">Resultados da pesquisa por:</string>
+    <string name="toast_login_required">É necessário fazer login pela conta do Facebook para usar a aplicação</string>
+    <string name="toast_login_error">Houve um problema ao tentar entrar com o Facebook. Tente mais tarde ou entre em contato conosco pela Play Store.</string>
 
     <!--Strings related to advertise-->
     <string name="btn_cancel">cancelar</string>
@@ -17,4 +19,5 @@
     <string name="input_price">R$</string>
     <string name="input_title">Titulo</string>
     <string name="tv_search_terms_default">(nenhum termo definido)</string>
+    <string name="tv_selling_label">Ou talvez você queira anunciar algo &#8230;</string>
 </resources>

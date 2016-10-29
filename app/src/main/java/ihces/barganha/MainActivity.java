@@ -3,6 +3,8 @@ package ihces.barganha;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
+import android.widget.Toast;
 
 import com.facebook.AccessToken;
 import com.facebook.CallbackManager;
@@ -24,10 +26,10 @@ public class MainActivity extends AppCompatActivity {
         AppEventsLogger.activateApp(this.getApplication());
         setContentView(R.layout.activity_main);
 
-        //AccessToken token = AccessToken.getCurrentAccessToken();
-        AccessToken token = null;
+        AccessToken token = AccessToken.getCurrentAccessToken();
+        //AccessToken token = null;
         if (token != null && !token.isExpired()) {
-            startActivity(new Intent(MainActivity.this, HomeActivity.class));
+            openHomeActivity();
         }
 
         LoginButton loginButton = (LoginButton)findViewById(R.id.login_button);
@@ -37,25 +39,31 @@ public class MainActivity extends AppCompatActivity {
         loginButton.registerCallback(callbackManager, new FacebookCallback<LoginResult>() {
             @Override
             public void onSuccess(LoginResult loginResult) {
-
+                openHomeActivity();
             }
 
             @Override
             public void onCancel() {
-                // App code
+                Toast.makeText(MainActivity.this, getText(R.string.toast_login_required), Toast.LENGTH_LONG).show();
             }
 
             @Override
             public void onError(FacebookException exception) {
-                throw exception;
+                Toast.makeText(MainActivity.this, getText(R.string.toast_login_error), Toast.LENGTH_LONG).show();
+                Log.e("FacebookLogin", "Couldn't get login result.", exception);
             }
         });
+    }
+
+    private void openHomeActivity() {
+        Intent goToHomeIntent = new Intent(MainActivity.this, HomeActivity.class);
+        startActivity(goToHomeIntent);
+        finish();
     }
 
     @Override
     protected void onActivityResult(final int requestCode, final int resultCode, final Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         callbackManager.onActivityResult(requestCode, resultCode, data);
-        startActivity(new Intent(MainActivity.this, HomeActivity.class));
     }
 }
