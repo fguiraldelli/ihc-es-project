@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/content_ad_details"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    tools:context="ihces.barganha.AdDetailsActivity"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:layout_marginBottom="4dp"
+        android:gravity="top">
+
+        <TextView
+            android:text="@string/input_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/tv_title_label"
+            android:layout_gravity="left"
+            tools:ignore="InefficientWeight,LabelFor,NestedWeights"
+            android:layout_weight="4" />
+
+        <TextView
+            android:text="@string/input_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/tv_title_valuie"
+            android:layout_gravity="top|left"
+            tools:ignore="InefficientWeight,LabelFor,NestedWeights"
+            android:layout_weight="1"
+            android:textSize="20sp"
+            android:layout_marginLeft="5dp" />
+    </LinearLayout>
+
+    <ImageView
+        android:layout_width="match_parent"
+        app:srcCompat="@drawable/ic_crop_original_black_24dp"
+        android:id="@+id/iv_photo"
+        android:layout_height="wrap_content"
+        android:layout_weight="1" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="top"
+        android:layout_marginBottom="4dp"
+        android:layout_marginTop="4dp">
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/input_description"
+            android:ems="10"
+            android:id="@+id/tv_description_label"
+            android:layout_gravity="left"
+            tools:ignore="InefficientWeight,LabelFor,NestedWeights"
+            android:layout_weight="4" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque et ligula quis nunc suscipit placerat. Mauris fringilla ex vel erat."
+            android:id="@+id/tv_description_value"
+            android:layout_gravity="top|left"
+            tools:ignore="InefficientWeight,LabelFor,NestedWeights"
+            android:layout_weight="1"
+            android:textSize="20sp"
+            android:elevation="1dp"
+            android:layout_marginLeft="5dp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="top"
+        android:layout_marginTop="4dp"
+        android:layout_marginBottom="4dp">
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/input_price"
+            android:ems="10"
+            android:id="@+id/tv_price_label"
+            tools:ignore="InefficientWeight,LabelFor,NestedWeights"
+            android:layout_weight="4"
+            android:layout_gravity="left" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="52,00"
+            android:id="@+id/tv_price_value"
+            android:layout_gravity="top"
+            tools:ignore="InefficientWeight,LabelFor,NestedWeights"
+            android:layout_weight="1"
+            android:textSize="20sp"
+            android:elevation="1dp"
+            android:layout_marginLeft="5dp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:layout_marginTop="4dp"
+        android:layout_marginBottom="4dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/tv_points_label"
+            android:id="@+id/tv_points_label"
+            android:layout_gravity="center_vertical"
+            tools:ignore="InefficientWeight,LabelFor,NestedWeights"
+            android:elevation="1dp"
+            android:layout_weight="1"
+            android:gravity="start" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:srcCompat="@drawable/ic_mood_black_24dp"
+            android:id="@+id/iv_points"
+            android:elevation="1dp"
+            android:layout_margin="4dp"
+            android:layout_weight="1.5" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:layout_marginBottom="4dp"
+        android:layout_marginTop="4dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/tv_evaluate_label"
+            android:id="@+id/tv_evaluate_label"
+            tools:ignore="InefficientWeight,LabelFor,NestedWeights"
+            android:elevation="1dp"
+            android:layout_gravity="center_vertical"
+            android:layout_weight="1" />
+
+        <ImageButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:srcCompat="@drawable/ic_thumb_up_black_24dp"
+            android:id="@+id/imageButton" />
+
+        <ImageButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:srcCompat="@drawable/ic_thumb_down_black_24dp"
+            android:id="@+id/imageButton2" />
+
+    </LinearLayout>
+</LinearLayout>

@@ -22,7 +22,7 @@ public class SearchResultsActivity extends AppCompatActivity {
 
         TextView tvSearchTerms = (TextView)findViewById(R.id.tv_search_terms);
         String searchTerms = getIntent().getStringExtra(SEARCH_TERMS_EXTRA_KEY);
-        
+
         if (!searchTerms.trim().isEmpty()) {
             tvSearchTerms.setText("\"" + searchTerms + "\"");
         }

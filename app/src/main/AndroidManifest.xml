@@ -20,17 +20,24 @@
             android:name="com.facebook.sdk.ApplicationId"
             android:value="@string/facebook_app_id" />
 
-        <activity android:name=".MainActivity">
+        <activity android:name=".MainActivity"
+            android:label="@string/title_activity_main" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
         <activity android:name=".HomeActivity" />
-        <activity android:name=".SearchResultsActivity"></activity>
-        <activity android:name=".AdvertiseActivity" />
-        <activity android:name=".MyAdsList"></activity>
+        <activity android:name=".SearchResultsActivity"
+            android:label="@string/title_activity_results" />
+        <activity android:name=".AdvertiseActivity"
+            android:label="@string/title_activity_advertise" />
+        <activity android:name=".MyAdsList"
+            android:label="@string/title_activity_my_ads" />
+        <activity android:name=".AdDetailsActivity"
+            android:label="@string/title_activity_ad_details" />
     </application>
 
 </manifest>
