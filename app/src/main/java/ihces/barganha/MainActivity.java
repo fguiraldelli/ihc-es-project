@@ -1,6 +1,7 @@
 package ihces.barganha;
 
 import android.content.Intent;
+import android.content.pm.ActivityInfo;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -21,13 +22,15 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+
         // Initialize the SDK before executing any other operations,
         FacebookSdk.sdkInitialize(getApplicationContext());
         AppEventsLogger.activateApp(this.getApplication());
         setContentView(R.layout.activity_main);
 
         AccessToken token = AccessToken.getCurrentAccessToken();
-        //AccessToken token = null;
+        //AccessToken token = null; // test no logged user
         if (token != null && !token.isExpired()) {
             openHomeActivity();
         }

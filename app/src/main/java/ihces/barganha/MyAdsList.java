@@ -1,6 +1,7 @@
 package ihces.barganha;
 
 import android.app.Activity;
+import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
@@ -16,6 +17,7 @@ public class MyAdsList extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
         setContentView(R.layout.activity_my_ads_list);
 
         String[] titles = {"Bacon", "Ham", "Tuna", "Candy", "Meatball", "Potato"};

@@ -47,7 +47,7 @@
             android:id="@+id/tv_label_selling"
             android:textAllCaps="false"
             android:textStyle="normal|italic"
-            android:layout_marginLeft="4dp" />
+            android:layout_marginLeft="5dp" />
 
         <Button
             android:layout_width="match_parent"
@@ -75,7 +75,8 @@
                 android:id="@+id/tv_pontos"
                 android:visibility="invisible"
                 android:textSize="18sp"
-                android:elevation="1dp" />
+                android:elevation="1dp"
+                android:layout_marginLeft="5dp" />
 
             <ImageView
                 android:layout_width="@dimen/iv_classification"

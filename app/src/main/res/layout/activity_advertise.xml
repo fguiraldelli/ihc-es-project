@@ -20,12 +20,12 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:inputType="textPersonName"
-            android:text="@string/input_title"
             android:ems="10"
-            android:id="@+id/editText7"
+            android:id="@+id/et_title"
             android:layout_gravity="center"
             android:layout_weight="1"
-            tools:ignore="InefficientWeight,LabelFor,NestedWeights" />
+            tools:ignore="InefficientWeight,LabelFor,NestedWeights"
+            android:hint="@string/input_title" />
     </LinearLayout>
 
     <LinearLayout
@@ -33,7 +33,7 @@
         android:layout_height="wrap_content"
         android:layout_weight="10">
         <ImageButton
-            android:id="@+id/imageButton1"
+            android:id="@+id/bt_choose_photo"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_gravity="center"
@@ -49,12 +49,12 @@
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:inputType="textPersonName"
-            android:text="@string/input_description"
             android:ems="10"
-            android:id="@+id/editText6"
+            android:id="@+id/et_description"
             android:layout_gravity="center"
             android:layout_weight="1"
-            tools:ignore="InefficientWeight,LabelFor,NestedWeights" />
+            tools:ignore="InefficientWeight,LabelFor,NestedWeights"
+            android:hint="@string/input_description" />
     </LinearLayout>
     <LinearLayout
         android:layout_width="match_parent"
@@ -66,11 +66,11 @@
             android:layout_height="wrap_content"
             android:inputType="numberDecimal"
             android:ems="10"
-            android:id="@+id/editText5"
+            android:id="@+id/et_price"
             android:layout_gravity="center"
             android:layout_weight="1"
-            android:text="@string/input_price"
-            tools:ignore="InefficientWeight,LabelFor,NestedWeights" />
+            tools:ignore="InefficientWeight,LabelFor,NestedWeights"
+            android:hint="@string/input_price" />
     </LinearLayout>
 
     <LinearLayout
@@ -84,7 +84,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
             android:layout_marginRight="15dp"
-            android:id="@+id/button4"
+            android:id="@+id/bt_cancel"
 
             android:layout_weight="1"
             tools:ignore="ButtonStyle,NestedWeights,RtlHardcoded" />
@@ -95,7 +95,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
             android:layout_marginLeft="15dp"
-            android:id="@+id/button5"
+            android:id="@+id/btn_save"
             android:layout_weight="1"
             tools:ignore="ButtonStyle,HardcodedText,RtlHardcoded" />
     </LinearLayout>
