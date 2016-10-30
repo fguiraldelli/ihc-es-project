@@ -10,6 +10,8 @@ public class Ad {
     private String photoBase64;
     private String photoFileName;
 
+    public Ad() { } // Enable Serialization
+
     public Ad(int id, String title, String description, BigDecimal price) {
         this(id, title, description, price, "", "");
     }

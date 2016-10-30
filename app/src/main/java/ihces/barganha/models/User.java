@@ -2,6 +2,8 @@ package ihces.barganha.models;
 
 import java.math.BigDecimal;
 
+import ihces.barganha.R;
+
 public class User {
 
     private String authToken;
@@ -52,5 +54,28 @@ public class User {
 
     public void setHasAds(boolean hasAds) {
         this.hasAds = hasAds;
+    }
+
+    public static User getStoredLocal() {
+        return new User();
+    }
+
+    public int getPointsDrawableId() {
+        int id = R.drawable.ic_mood_neutral;
+
+        if (hasAds) {
+            if (points.compareTo(new BigDecimal(20)) < 0)
+                id = R.drawable.ic_mood_angry;
+            else if (points.compareTo(new BigDecimal(40)) < 0)
+                id = R.drawable.ic_mood_troubled;
+            else if (points.compareTo(new BigDecimal(60)) < 0)
+                id = R.drawable.ic_mood_neutral;
+            else if (points.compareTo(new BigDecimal(80)) < 0)
+                id = R.drawable.ic_mood_content;
+            else
+                id = R.drawable.ic_mood_happy;
+        }
+
+        return id;
     }
 }

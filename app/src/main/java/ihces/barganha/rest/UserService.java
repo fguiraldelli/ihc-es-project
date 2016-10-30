@@ -3,6 +3,8 @@ package ihces.barganha.rest;
 import com.android.volley.toolbox.StringRequest;
 import com.google.gson.Gson;
 
+import java.math.BigDecimal;
+
 import ihces.barganha.models.User;
 
 public class UserService extends ApiServiceBase {
@@ -10,7 +12,7 @@ public class UserService extends ApiServiceBase {
     private static final String RESOURCE = "login.json";
     private final Gson gson = new Gson();
 
-    public void postLogin(User user, final ServiceResponseListener<String> listener) {
+    public void postLogin(User user, ServiceResponseListener<String> listener) {
         if (isMock) {
             listener.onResponse("OK");
             return;
@@ -21,8 +23,22 @@ public class UserService extends ApiServiceBase {
         queue.add(request);
     }
 
+    public void getMyPoints(User user, ServiceResponseListener<User> listener) {
+        if (isMock) {
+            user.setPoints(BigDecimal.valueOf(70));
+            user.setHasAds(true);
+            listener.onResponse(user);
+            return;
+        }
+
+        String json = gson.toJson(user, User.class);
+        GsonRequest<User> request = makePostRetrieveRequest(User.class, listener, json);
+        queue.add(request);
+    }
+
     @Override
     protected String makeUrl() {
         return BASE_URL + RESOURCE;
     }
+
 }
