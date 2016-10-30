@@ -31,14 +31,17 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_weight="10">
+        android:layout_weight="0">
         <ImageButton
             android:id="@+id/bt_choose_photo"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
             android:layout_gravity="center"
             android:contentDescription="insert image here"
-            tools:ignore="HardcodedText" />
+            tools:ignore="HardcodedText,VectorDrawableCompat"
+            android:layout_height="200dp"
+            app:srcCompat="@drawable/ic_photo"
+            android:cropToPadding="true"
+            android:adjustViewBounds="false" />
     </LinearLayout>
 
     <LinearLayout

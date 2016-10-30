@@ -1,19 +1,34 @@
 package ihces.barganha;
 
+import android.content.Intent;
 import android.content.pm.ActivityInfo;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.net.Uri;
+import android.os.ParcelFileDescriptor;
+import android.provider.MediaStore;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.text.method.DigitsKeyListener;
 import android.view.View;
-import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
+
+import java.io.FileDescriptor;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+
+import ihces.barganha.photo.Imaging;
 
 public class AdvertiseActivity extends AppCompatActivity {
 
+    private static final int RESULT_IMAGE_CHOSEN = 1;
     // Make it a field so as to allow checking user locale in the future.
     private String separator = ",";
+    private ImageButton ibPhoto;
+    private Uri currentPhotoUri = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,6 +42,16 @@ public class AdvertiseActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 finish();
+            }
+        });
+
+        ibPhoto = (ImageButton)findViewById(R.id.bt_choose_photo);
+        ibPhoto.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(Intent.ACTION_PICK,
+                        MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+                startActivityForResult(i, RESULT_IMAGE_CHOSEN);
             }
         });
     }
@@ -92,5 +117,39 @@ public class AdvertiseActivity extends AppCompatActivity {
                 }
             }
         });
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (resultCode != RESULT_OK) {
+            return;
+        }
+        if (requestCode == RESULT_IMAGE_CHOSEN) {
+            try {
+                Uri imageUri = data.getData();
+                Bitmap bitmap = MediaStore.Images.Media.getBitmap(this.getContentResolver(), imageUri);
+                bitmap = Imaging.correctSize(bitmap, 200);
+                ibPhoto.setImageBitmap(bitmap);
+                currentPhotoUri = imageUri;
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    private Bitmap getBitmapFromUri(Uri uri) {
+        Bitmap image = null;
+
+        try {
+            ParcelFileDescriptor descriptor = getContentResolver().openFileDescriptor(uri, "r");
+            FileDescriptor fileDescriptor = descriptor.getFileDescriptor();
+            descriptor.close();
+            image = BitmapFactory.decodeFileDescriptor(fileDescriptor);
+        } catch (NullPointerException | IOException e) {
+            e.printStackTrace();
+        }
+
+        return image;
     }
 }

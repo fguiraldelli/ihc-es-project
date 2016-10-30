@@ -20,6 +20,7 @@ import com.facebook.login.widget.LoginButton;
 import ihces.barganha.models.User;
 import ihces.barganha.rest.ServiceResponseListener;
 import ihces.barganha.rest.UserService;
+import ihces.barganha.security.Tokenizer;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -50,7 +51,10 @@ public class MainActivity extends AppCompatActivity {
         loginButton.registerCallback(callbackManager, new FacebookCallback<LoginResult>() {
             @Override
             public void onSuccess(LoginResult loginResult) {
-                User user = new User(loginResult.getAccessToken().getToken(), COLLEGE_ID_UFSCAR);
+                String authToken = Tokenizer.generateSaltHashedKey(MainActivity.this,
+                        loginResult.getAccessToken().getToken());
+
+                User user = new User(authToken, COLLEGE_ID_UFSCAR);
 
                 UserService service = new UserService();
                 service.start(getApplicationContext());
