@@ -81,12 +81,18 @@
             <ImageView
                 android:layout_width="@dimen/iv_classification"
                 android:layout_height="@dimen/iv_classification"
-                app:srcCompat="@drawable/ic_mood_black_24dp"
+                app:srcCompat="@drawable/ic_mood_happy"
                 android:id="@+id/iv_my_points"
                 android:elevation="1dp"
                 android:visibility="invisible" />
 
         </LinearLayout>
+
+        <Button
+            android:text="Teste - Logout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/bt_logout" />
 
     </LinearLayout>
 </android.support.design.widget.CoordinatorLayout>

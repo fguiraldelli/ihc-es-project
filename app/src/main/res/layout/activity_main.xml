@@ -32,4 +32,24 @@
         android:layout_below="@+id/imageView"
         android:layout_alignParentStart="true" />
 
+    <RadioButton
+        android:text="UFSCar Sorocaba (piloto)"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/cbCollegeTemp"
+        android:checked="true"
+        android:focusable="false"
+        android:clickable="false"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true" />
+
+    <TextView
+        android:text="Universidade:"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/textView"
+        android:layout_alignBaseline="@+id/cbCollegeTemp"
+        android:layout_alignBottom="@+id/cbCollegeTemp"
+        android:layout_toStartOf="@+id/cbCollegeTemp" />
+
 </RelativeLayout>

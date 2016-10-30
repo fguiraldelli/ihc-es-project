@@ -3,4 +3,10 @@
     <color name="colorPrimary">#3F51B5</color>
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
+
+    <color name="moodHappy">#998c00</color>
+    <color name="moodContent">#d7c900</color>
+    <color name="moodNeutral">#1ba703</color>
+    <color name="moodTroubled">#4e2883</color>
+    <color name="moodAngry">#9c1216</color>
 </resources>

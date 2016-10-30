@@ -13,10 +13,18 @@ import com.facebook.FacebookCallback;
 import com.facebook.FacebookException;
 import com.facebook.FacebookSdk;
 import com.facebook.appevents.AppEventsLogger;
+import com.facebook.login.LoginManager;
 import com.facebook.login.LoginResult;
 import com.facebook.login.widget.LoginButton;
 
+import ihces.barganha.models.User;
+import ihces.barganha.rest.ServiceResponseListener;
+import ihces.barganha.rest.UserService;
+
 public class MainActivity extends AppCompatActivity {
+
+    private static final int COLLEGE_ID_UFSCAR = 1;
+
     CallbackManager callbackManager;
 
     @Override
@@ -42,7 +50,25 @@ public class MainActivity extends AppCompatActivity {
         loginButton.registerCallback(callbackManager, new FacebookCallback<LoginResult>() {
             @Override
             public void onSuccess(LoginResult loginResult) {
-                openHomeActivity();
+                User user = new User(loginResult.getAccessToken().getToken(), COLLEGE_ID_UFSCAR);
+
+                UserService service = new UserService();
+                service.start(getApplicationContext());
+                service.setAsMock(); // DEBUG LOCAL
+                service.postLogin(user, new ServiceResponseListener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        openHomeActivity();
+                    }
+
+                    @Override
+                    public void onError(Exception error) {
+                        LoginManager.getInstance().logOut();
+                        AccessToken.setCurrentAccessToken(null);
+                        Toast.makeText(MainActivity.this, getText(R.string.toast_login_error), Toast.LENGTH_LONG).show();
+                        Log.e("FacebookLogin", "Couldn't POST login result to our API.", error);
+                    }
+                });
             }
 
             @Override

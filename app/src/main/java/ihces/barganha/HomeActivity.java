@@ -7,9 +7,14 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.View;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
+import android.widget.Toast;
+
+import com.facebook.AccessToken;
+import com.facebook.login.LoginManager;
 
 public class HomeActivity extends AppCompatActivity {
 
@@ -24,6 +29,18 @@ public class HomeActivity extends AppCompatActivity {
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
         setContentView(R.layout.activity_home);
         setButtonEvents();
+        setAvailableOptions();
+    }
+
+    private void setAvailableOptions() {
+        /*
+        TODO hide/show :
+            - label for first time advertiser;
+            - MY ADS button;
+            - classification icon and label
+        */
+
+
     }
 
     private void setButtonEvents() {
@@ -53,6 +70,17 @@ public class HomeActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(HomeActivity.this, MyAdsList.class));
+            }
+        });
+
+        findViewById(R.id.bt_logout).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                LoginManager.getInstance().logOut();
+                AccessToken.setCurrentAccessToken(null);
+                Log.d("HOME", "TESTE - Logged Out of Facebook.");
+                startActivity(new Intent(HomeActivity.this, MainActivity.class));
+                finish();
             }
         });
     }
