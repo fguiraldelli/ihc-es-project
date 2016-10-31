@@ -3,17 +3,13 @@ package ihces.barganha;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.facebook.AccessToken;
 import com.facebook.login.LoginManager;
@@ -42,21 +38,24 @@ public class HomeActivity extends AppCompatActivity {
         UserService service = new UserService();
         service.start(getApplicationContext());
         service.setAsMock();
-        service.getMyPoints(User.getStoredLocal(),
-                new ServiceResponseListener<User>() {
+        service.getMyUser(User.getStoredLocal(this),
+                new ServiceResponseListener<User[]>() {
                     @Override
-                    public void onResponse(User response) {
+                    public void onResponse(User[] response) {
+                        User user = response[0];
+                        User.storeLocal(HomeActivity.this, user);
+
                         final TextView tvLabelSelling = (TextView)findViewById(R.id.tv_label_selling);
                         final Button btnMyAdsLocal = (Button)findViewById(R.id.btn_my_ads);
                         final TextView tvPointsLabel = (TextView)findViewById(R.id.tv_points_label);
                         final ImageView ivMyPoints = (ImageView)findViewById(R.id.iv_my_points);
 
-                        if (response.isHasAds()) {
+                        if (user.isHasAds()) {
                             btnMyAdsLocal.setVisibility(View.VISIBLE);
                             tvPointsLabel.setVisibility(View.VISIBLE);
                             ivMyPoints.setVisibility(View.VISIBLE);
                             tvLabelSelling.setVisibility(View.INVISIBLE);
-                            ivMyPoints.setImageDrawable(getResources().getDrawable(response.getPointsDrawableId()));
+                            ivMyPoints.setImageDrawable(getResources().getDrawable(user.getPointsDrawableId()));
                         } else {
                             btnMyAdsLocal.setVisibility(View.INVISIBLE);
                             tvPointsLabel.setVisibility(View.INVISIBLE);

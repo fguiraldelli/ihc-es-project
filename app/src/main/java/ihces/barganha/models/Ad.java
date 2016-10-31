@@ -13,15 +13,18 @@ public class Ad {
     private String price;
     @SerializedName("imagem")
     private String photoBase64;
+    @SerializedName("token")
+    private String authToken;
 
     public Ad() { } // Enable Serialization
 
-    public Ad(int id, String title, String description, String price) {
-        this(id, title, description, price, "");
+    public Ad(int id, String authToken, String title, String description, String price) {
+        this(id, authToken, title, description, price, "");
     }
 
-    public Ad(int id, String title, String description, String price, String photoBase64) {
+    public Ad(int id, String authToken, String title, String description, String price, String photoBase64) {
         this.id = id;
+        this.authToken = authToken;
         this.title = title;
         this.description = description;
         this.price = price;
@@ -66,5 +69,13 @@ public class Ad {
 
     public void setPhotoBase64(String photoBase64) {
         this.photoBase64 = photoBase64;
+    }
+
+    public String getAuthToken() {
+        return authToken;
+    }
+
+    public void setAuthToken(String authToken) {
+        this.authToken = authToken;
     }
 }

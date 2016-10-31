@@ -24,6 +24,7 @@ import java.io.IOException;
 import java.math.BigDecimal;
 
 import ihces.barganha.models.Ad;
+import ihces.barganha.models.User;
 import ihces.barganha.photo.Imaging;
 import ihces.barganha.rest.AdService;
 import ihces.barganha.rest.ServiceResponseListener;
@@ -80,6 +81,7 @@ public class AdvertiseActivity extends AppCompatActivity {
 
                 try {
                     Ad newAd = new Ad(0,
+                            User.getStoredLocal(AdvertiseActivity.this).getAuthToken(),
                             etTitle.getText().toString(),
                             etDescription.getText().toString(),
                             etPrice.getText().toString()

@@ -20,7 +20,7 @@ public class JsonObjectRequestNoExpect extends JsonObjectRequest {
 
     @Override
     protected Response<JSONObject> parseNetworkResponse(NetworkResponse response) {
-        if (response.statusCode == 200) {
+        if (response.statusCode < 400) {
             JSONObject jsResp = new JSONObject();
             try {
                 jsResp.put("statusCode", response.statusCode);
@@ -29,7 +29,7 @@ public class JsonObjectRequestNoExpect extends JsonObjectRequest {
             }
             return Response.success(jsResp, HttpHeaderParser.parseCacheHeaders(response));
         } else {
-            return Response.error(new ParseError(new Exception("Result NOT 200 OK!")));
+            return Response.error(new ParseError(new Exception("Result NOT OK! Code: " + response.statusCode)));
         }
     }
 }

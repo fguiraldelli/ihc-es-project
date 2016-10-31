@@ -54,14 +54,15 @@ public class MainActivity extends AppCompatActivity {
                 String authToken = Tokenizer.generateSaltHashedKey(MainActivity.this,
                         loginResult.getAccessToken().getToken());
 
-                User user = new User(authToken, COLLEGE_ID_UFSCAR);
+                final User user = new User(authToken, COLLEGE_ID_UFSCAR);
 
                 UserService service = new UserService();
                 service.start(getApplicationContext());
-                service.setAsMock(); // DEBUG LOCAL
+                //service.setAsMock(); // DEBUG LOCAL
                 service.postLogin(user, new ServiceResponseListener<String>() {
                     @Override
                     public void onResponse(String response) {
+                        User.storeLocal(MainActivity.this, user);
                         openHomeActivity();
                     }
 

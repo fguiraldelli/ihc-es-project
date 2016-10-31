@@ -75,4 +75,9 @@ public class Imaging {
         byte[] bytes = stream.toByteArray();
         return Base64.encodeToString(bytes, Base64.DEFAULT);
     }
+
+    public static Bitmap base64DecodeImage(String photoBase64) {
+        byte[] bytes = Base64.decode(photoBase64, Base64.DEFAULT);
+        return BitmapFactory.decodeByteArray(bytes, 0, bytes.length);
+    }
 }

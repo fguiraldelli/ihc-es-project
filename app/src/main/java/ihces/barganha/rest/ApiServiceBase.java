@@ -8,10 +8,13 @@ import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.google.gson.Gson;
 
+import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.io.UnsupportedEncodingException;
@@ -21,6 +24,7 @@ import java.util.Map;
 public abstract class ApiServiceBase {
 
     public static final String BASE_URL = "http://54.145.242.159:1234/";
+    private static final String GET_EXTENSION = ".json";
     protected boolean isMock = false;
     protected RequestQueue queue = null;
 
@@ -107,15 +111,15 @@ public abstract class ApiServiceBase {
     }
 
     @NonNull
-    protected <T> GsonRequest<T> makeGetRequest(Class<T> outClass,
-                                                final ServiceResponseListener<T> listener,
-                                                Map<String, String> params) {
-        return new GsonRequest<>(makeUrl(params),
-                outClass,
-                new Response.Listener<T>() {
+    protected <T> JsonArrayRequest makeGetRequest(final Class<T> outClass,
+                                                   final ServiceResponseListener<T> listener,
+                                                   Map<String, String> params) {
+        return new JsonArrayRequest(makeUrl(params),
+                new Response.Listener<JSONArray>() {
                     @Override
-                    public void onResponse(T response) {
-                        listener.onResponse(response);
+                    public void onResponse(JSONArray response) {
+                        T obj = new Gson().fromJson(response.toString(), outClass);
+                        listener.onResponse(obj);
                     }
                 },
                 new Response.ErrorListener() {
@@ -129,7 +133,7 @@ public abstract class ApiServiceBase {
 
     protected String makeUrl(Map<String, String> params) {
         StringBuilder sBuilder = new StringBuilder();
-        sBuilder.append(makeUrl());
+        sBuilder.append(makeUrl() + GET_EXTENSION);
         if (params != null) {
             int i = 0;
             for (Map.Entry<String, String> entry : params.entrySet()) {
@@ -138,13 +142,14 @@ public abstract class ApiServiceBase {
                 } else {
                     sBuilder.append('&');
                 }
-                try {
-                    sBuilder.append(URLEncoder.encode(entry.getKey(), "UTF-8"));
-                    sBuilder.append("=");
-                    sBuilder.append(URLEncoder.encode(entry.getValue(), "UTF-8"));
-                } catch (UnsupportedEncodingException e) {
-                    e.printStackTrace();
-                }
+                //try {
+                //    sBuilder.append(URLEncoder.encode(entry.getKey(), "UTF-8"));
+                //    sBuilder.append("=");
+                //    sBuilder.append(URLEncoder.encode(entry.getValue(), "UTF-8"));
+                    sBuilder.append(entry.getKey() + "=" + entry.getValue());
+                //} catch (UnsupportedEncodingException e) {
+                //    e.printStackTrace();
+                //}
             }
         }
         return sBuilder.toString();

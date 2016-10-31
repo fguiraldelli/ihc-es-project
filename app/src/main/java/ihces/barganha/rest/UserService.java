@@ -1,15 +1,20 @@
 package ihces.barganha.rest;
 
-import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.JsonArrayRequest;
+import com.android.volley.toolbox.JsonObjectRequest;
 import com.google.gson.Gson;
 
-import java.math.BigDecimal;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.HashMap;
+import java.util.Map;
 
 import ihces.barganha.models.User;
 
 public class UserService extends ApiServiceBase {
 
-    private static final String RESOURCE = "login";
+    private static final String RESOURCE = "usuarios";
     private final Gson gson = new Gson();
 
     public void postLogin(User user, ServiceResponseListener<String> listener) {
@@ -18,21 +23,31 @@ public class UserService extends ApiServiceBase {
             return;
         }
 
-        String json = gson.toJson(user, User.class);
-        StringRequest request = makePostRequest(listener, json);
+        JSONObject json = new JSONObject();
+        try {
+            json.put("token", user.getAuthToken());
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        JsonObjectRequest request = makePostRequest(listener, json);
         queue.add(request);
     }
 
-    public void getMyPoints(User user, ServiceResponseListener<User> listener) {
+    public void getMyUser(User user, ServiceResponseListener<User[]> listener) {
         if (isMock) {
-            user.setPoints(BigDecimal.valueOf(70));
-            user.setHasAds(true);
-            listener.onResponse(user);
+            user.setPoints(5);
+            user.setAds(1);
+            listener.onResponse(new User[]{user});
             return;
         }
 
-        String json = gson.toJson(user, User.class);
-        GsonRequest<User> request = makePostRetrieveRequest(User.class, listener, json);
+        Map<String, String> params = new HashMap<>();
+        try {
+            params.put("token", user.getAuthToken());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        JsonArrayRequest request = makeGetRequest(User[].class, listener, params);
         queue.add(request);
     }
 

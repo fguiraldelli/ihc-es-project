@@ -12,34 +12,32 @@ import android.widget.TextView;
 import java.math.BigDecimal;
 import java.text.DecimalFormat;
 
+import ihces.barganha.models.Ad;
+import ihces.barganha.photo.Imaging;
+
 public class CustomAdapter extends BaseAdapter{
 
-    private final String[] titles;
-    private final BigDecimal[] prices;
-    private final String[] description;
+    private final Ad[] ads;
     private LayoutInflater adsInflater;
-    private DecimalFormat decimalFormatter = new DecimalFormat("#0.##");
 
-    public CustomAdapter(Context context, String[] titles, String[] description,BigDecimal[] prices) {
-        this.titles = titles;
-        this.description = description;
-        this.prices = prices;
+    public CustomAdapter(Context context, Ad[] ads) {
+        this.ads = ads;
         adsInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
     }
 
     @Override
     public int getCount() {
-        return titles.length;
+        return ads.length;
     }
 
     @Override
     public Object getItem(int i) {
-        return this.titles[i];
+        return this.ads[i];
     }
 
     @Override
     public long getItemId(int i) {
-        return i;
+        return this.ads[i].getId();
     }
 
     @NonNull
@@ -58,10 +56,12 @@ public class CustomAdapter extends BaseAdapter{
         TextView descriptionText = (TextView) customView.findViewById(R.id.row_description);
         ImageView itemImage = (ImageView) customView.findViewById(R.id.row_image);
 
-        titleText.setText(titles[position]);
-        priceText.setText(decimalFormatter.format(prices[position]));
-        descriptionText.setText(description[position]);
-        itemImage.setImageResource(R.drawable.com_facebook_profile_picture_blank_square);
+        Ad currentAd = ads[position];
+
+        titleText.setText(currentAd.getTitle());
+        priceText.setText(currentAd.getPrice());
+        descriptionText.setText(currentAd.getDescription());
+        itemImage.setImageBitmap(Imaging.base64DecodeImage(currentAd.getPhotoBase64()));
 
         return customView;
 

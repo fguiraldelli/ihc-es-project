@@ -92,7 +92,8 @@
             android:text="Teste - Logout"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/bt_logout" />
+            android:id="@+id/bt_logout"
+            android:visibility="invisible" />
 
     </LinearLayout>
 </android.support.design.widget.CoordinatorLayout>
