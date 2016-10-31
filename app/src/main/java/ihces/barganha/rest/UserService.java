@@ -34,16 +34,19 @@ public class UserService extends ApiServiceBase {
     }
 
     public void getMyUser(User user, ServiceResponseListener<User[]> listener) {
+        getUser(user.getAuthToken(), listener);
+    }
+
+    public void getUser(String token, ServiceResponseListener<User[]> listener) {
         if (isMock) {
-            user.setPoints(5);
-            user.setAds(1);
+            User user = new User(token, 1, 5, 1);
             listener.onResponse(new User[]{user});
             return;
         }
 
         Map<String, String> params = new HashMap<>();
         try {
-            params.put("token", user.getAuthToken());
+            params.put("token", token);
         } catch (Exception e) {
             e.printStackTrace();
         }

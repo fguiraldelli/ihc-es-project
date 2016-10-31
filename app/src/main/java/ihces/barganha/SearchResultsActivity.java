@@ -47,8 +47,6 @@ public class SearchResultsActivity extends AppCompatActivity {
                         new AdapterView.OnItemClickListener(){
                             @Override
                             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                                //String food = String.valueOf(adapterView.getItemAtPosition(i));
-                                //Toast.makeText(SearchResultsActivity.this, food, Toast.LENGTH_LONG).show();
                                 openDetailsActivity((Ad)adapter.getItem(i));
                             }
                         }

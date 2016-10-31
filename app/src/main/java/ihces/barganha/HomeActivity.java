@@ -37,7 +37,7 @@ public class HomeActivity extends AppCompatActivity {
     private void setAvailableOptions() {
         UserService service = new UserService();
         service.start(getApplicationContext());
-        service.setAsMock();
+        //service.setAsMock();
         service.getMyUser(User.getStoredLocal(this),
                 new ServiceResponseListener<User[]>() {
                     @Override

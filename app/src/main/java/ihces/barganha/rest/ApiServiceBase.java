@@ -39,31 +39,6 @@ public abstract class ApiServiceBase {
     }
 
     @NonNull
-    protected StringRequest makePostRequest(final ServiceResponseListener<String> listener,
-                                            final String postData) {
-        return new StringRequest(Request.Method.POST,
-                    makeUrl(),
-                    new Response.Listener<String>() {
-                        @Override
-                        public void onResponse(String response) {
-                            listener.onResponse(response);
-                        }
-                    },
-                    new Response.ErrorListener() {
-                        @Override
-                        public void onErrorResponse(VolleyError error) {
-                            listener.onError(error);
-                        }
-                    }
-            ) {
-                @Override
-                public byte[] getBody() throws AuthFailureError {
-                    return postData.getBytes();
-                }
-            };
-    }
-
-    @NonNull
     protected JsonObjectRequest makePostRequest(final ServiceResponseListener<String> listener,
                                                 final JSONObject postData) {
         return new JsonObjectRequestNoExpect(makeUrl(),
@@ -81,33 +56,6 @@ public abstract class ApiServiceBase {
                     }
                 }
         );
-    }
-
-    @NonNull
-    protected <T> GsonRequest<T> makePostRetrieveRequest(Class<T> outClass,
-            final ServiceResponseListener<T> listener,
-            final String outJson) {
-
-        return new GsonRequest<T>(makeUrl(),
-                outClass,
-                new Response.Listener<T>() {
-                    @Override
-                    public void onResponse(T response) {
-                        listener.onResponse(response);
-                    }
-                },
-                new Response.ErrorListener() {
-                    @Override
-                    public void onErrorResponse(VolleyError error) {
-                        listener.onError(error);
-                    }
-                }
-        ) {
-            @Override
-            public byte[] getBody() throws AuthFailureError {
-                return outJson.getBytes();
-            }
-        };
     }
 
     @NonNull
@@ -142,14 +90,14 @@ public abstract class ApiServiceBase {
                 } else {
                     sBuilder.append('&');
                 }
-                //try {
-                //    sBuilder.append(URLEncoder.encode(entry.getKey(), "UTF-8"));
-                //    sBuilder.append("=");
-                //    sBuilder.append(URLEncoder.encode(entry.getValue(), "UTF-8"));
-                    sBuilder.append(entry.getKey() + "=" + entry.getValue());
-                //} catch (UnsupportedEncodingException e) {
-                //    e.printStackTrace();
-                //}
+                try {
+                    sBuilder.append(URLEncoder.encode(entry.getKey(), "UTF-8"));
+                    sBuilder.append("=");
+                    sBuilder.append(URLEncoder.encode(entry.getValue(), "UTF-8"));
+                    // sBuilder.append(entry.getKey() + "=" + entry.getValue());
+                } catch (UnsupportedEncodingException e) {
+                    e.printStackTrace();
+                }
             }
         }
         return sBuilder.toString();

@@ -149,13 +149,13 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:srcCompat="@drawable/ic_thumb_up_black_24dp"
-            android:id="@+id/imageButton" />
+            android:id="@+id/ibt_up" />
 
         <ImageButton
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:srcCompat="@drawable/ic_thumb_down_black_24dp"
-            android:id="@+id/imageButton2" />
+            android:id="@+id/ibt_down" />
 
     </LinearLayout>
 </LinearLayout>
