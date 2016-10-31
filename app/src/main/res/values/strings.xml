@@ -20,6 +20,8 @@
     <string name="input_title">Título</string>
     <string name="tv_search_terms_default">(nenhum termo definido)</string>
     <string name="tv_selling_label">Ou talvez você queira anunciar algo &#8230;</string>
+    <string name="toast_post_ad_error">Houve um problema ao publicar o anúncio. Tente mais tarde ou entre em contato conosco pela Play Store.</string>
+    <string name="toast_post_ad_ok">Seu anúncio foi publicado.</string>
 
     <!-- Activity titles -->
     <string name="title_activity_main">Bem-vindo!</string>

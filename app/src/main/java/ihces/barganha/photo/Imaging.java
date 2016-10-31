@@ -14,6 +14,10 @@ public class Imaging {
     // TODO test to find the best maximum
     private static final int MAX_IMAGE_SIZE = 600; // 70;
 
+    public static Bitmap correctSizeForUploading(Bitmap source) {
+        return correctSize(source, MAX_IMAGE_SIZE);
+    }
+
     public static Bitmap correctSizeForUploading(File source) {
         return correctSize(source, MAX_IMAGE_SIZE);
     }

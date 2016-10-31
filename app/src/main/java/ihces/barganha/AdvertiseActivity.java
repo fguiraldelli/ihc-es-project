@@ -12,22 +12,34 @@ import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.text.method.DigitsKeyListener;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.Toast;
 
 import java.io.FileDescriptor;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.math.BigDecimal;
 
+import ihces.barganha.models.Ad;
 import ihces.barganha.photo.Imaging;
+import ihces.barganha.rest.AdService;
+import ihces.barganha.rest.ServiceResponseListener;
 
 public class AdvertiseActivity extends AppCompatActivity {
 
     private static final int RESULT_IMAGE_CHOSEN = 1;
+
     // Make it a field so as to allow checking user locale in the future.
     private String separator = ",";
     private ImageButton ibPhoto;
+    private EditText etTitle;
+    private EditText etDescription;
+    private EditText etPrice;
+
+    // Keep it around till it's time to upload the image.
     private Uri currentPhotoUri = null;
 
     @Override
@@ -36,7 +48,9 @@ public class AdvertiseActivity extends AppCompatActivity {
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
         setContentView(R.layout.activity_advertise);
 
+        findViews();
         setupPriceInput();
+        // TODO only enable save button if all fields are provided
 
         findViewById(R.id.bt_cancel).setOnClickListener(new View.OnClickListener() {
             @Override
@@ -45,7 +59,6 @@ public class AdvertiseActivity extends AppCompatActivity {
             }
         });
 
-        ibPhoto = (ImageButton)findViewById(R.id.bt_choose_photo);
         ibPhoto.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -54,12 +67,59 @@ public class AdvertiseActivity extends AppCompatActivity {
                 startActivityForResult(i, RESULT_IMAGE_CHOSEN);
             }
         });
+
+        findViewById(R.id.btn_save).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (etTitle.getText().length() == 0 ||
+                        etDescription.getText().length() == 0 ||
+                        etPrice.getText().length() == 0 ||
+                        currentPhotoUri == null) {
+                    return;
+                }
+
+                try {
+                    Ad newAd = new Ad(0,
+                            etTitle.getText().toString(),
+                            etDescription.getText().toString(),
+                            etPrice.getText().toString()
+                    );
+
+                    Bitmap bitmap = MediaStore.Images.Media.getBitmap(AdvertiseActivity.this.getContentResolver(), currentPhotoUri);
+                    Bitmap scaled = Imaging.correctSizeForUploading(bitmap);
+                    newAd.setPhotoBase64(Imaging.base64EncodeImage(scaled));
+
+                    AdService service = new AdService();
+                    service.start(AdvertiseActivity.this);
+                    service.postAd(newAd, new ServiceResponseListener<String>() {
+                        @Override
+                        public void onResponse(String response) {
+                            Toast.makeText(AdvertiseActivity.this, getText(R.string.toast_post_ad_ok), Toast.LENGTH_LONG).show();
+                            finish();
+                        }
+
+                        @Override
+                        public void onError(Exception error) {
+                            Toast.makeText(AdvertiseActivity.this, getText(R.string.toast_post_ad_error), Toast.LENGTH_LONG).show();
+                            Log.e("Advertise", "Couldn't POST ad to our API.", error);
+                        }
+                    });
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+    }
+
+    private void findViews() {
+        etTitle = (EditText) findViewById(R.id.et_title);
+        etDescription = (EditText) findViewById(R.id.et_description);
+        etPrice = (EditText)findViewById(R.id.et_price);
+        ibPhoto = (ImageButton)findViewById(R.id.bt_choose_photo);
     }
 
     private void setupPriceInput() {
-        EditText etPrice = (EditText)findViewById(R.id.et_price);
         etPrice.setKeyListener(DigitsKeyListener.getInstance("0123456789" + separator));
-
         etPrice.addTextChangedListener(new TextWatcher() {
             String beforeText = "";
             String finalText = "";
@@ -136,20 +196,5 @@ public class AdvertiseActivity extends AppCompatActivity {
                 e.printStackTrace();
             }
         }
-    }
-
-    private Bitmap getBitmapFromUri(Uri uri) {
-        Bitmap image = null;
-
-        try {
-            ParcelFileDescriptor descriptor = getContentResolver().openFileDescriptor(uri, "r");
-            FileDescriptor fileDescriptor = descriptor.getFileDescriptor();
-            descriptor.close();
-            image = BitmapFactory.decodeFileDescriptor(fileDescriptor);
-        } catch (NullPointerException | IOException e) {
-            e.printStackTrace();
-        }
-
-        return image;
     }
 }

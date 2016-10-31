@@ -1,28 +1,31 @@
 package ihces.barganha.models;
 
-import java.math.BigDecimal;
+import com.google.gson.annotations.SerializedName;
 
 public class Ad {
+
     private int id;
+    @SerializedName("titulo")
     private String title;
+    @SerializedName("descricao")
     private String description;
-    private BigDecimal price;
+    @SerializedName("preco")
+    private String price;
+    @SerializedName("imagem")
     private String photoBase64;
-    private String photoFileName;
 
     public Ad() { } // Enable Serialization
 
-    public Ad(int id, String title, String description, BigDecimal price) {
-        this(id, title, description, price, "", "");
+    public Ad(int id, String title, String description, String price) {
+        this(id, title, description, price, "");
     }
 
-    public Ad(int id, String title, String description, BigDecimal price, String photoBase64, String photoFileName) {
+    public Ad(int id, String title, String description, String price, String photoBase64) {
         this.id = id;
         this.title = title;
         this.description = description;
         this.price = price;
         this.photoBase64 = photoBase64;
-        this.photoFileName = photoFileName;
     }
 
     public int getId() {
@@ -49,11 +52,11 @@ public class Ad {
         this.description = description;
     }
 
-    public BigDecimal getPrice() {
+    public String getPrice() {
         return price;
     }
 
-    public void setPrice(BigDecimal price) {
+    public void setPrice(String price) {
         this.price = price;
     }
 
@@ -63,13 +66,5 @@ public class Ad {
 
     public void setPhotoBase64(String photoBase64) {
         this.photoBase64 = photoBase64;
-    }
-
-    public String getPhotoFileName() {
-        return photoFileName;
-    }
-
-    public void setPhotoFileName(String photoFileName) {
-        this.photoFileName = photoFileName;
     }
 }

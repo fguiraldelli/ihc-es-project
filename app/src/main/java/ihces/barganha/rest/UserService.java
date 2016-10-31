@@ -9,7 +9,7 @@ import ihces.barganha.models.User;
 
 public class UserService extends ApiServiceBase {
 
-    private static final String RESOURCE = "login.json";
+    private static final String RESOURCE = "login";
     private final Gson gson = new Gson();
 
     public void postLogin(User user, ServiceResponseListener<String> listener) {

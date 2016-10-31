@@ -1,15 +1,19 @@
 package ihces.barganha.models;
 
+import com.google.gson.annotations.SerializedName;
+
 import java.math.BigDecimal;
 
 import ihces.barganha.R;
 
 public class User {
 
+    @SerializedName("token")
     private String authToken;
-    private int collegeId = 1;
+    private transient int collegeId = 1;
+    @SerializedName("pontos")
     private BigDecimal points;
-    private boolean hasAds;
+    private transient boolean hasAds;
 
     public User() {} // Enable serialization
 
