@@ -1,5 +1,6 @@
 package ihces.barganha.photo;
 
+import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.util.Base64;
@@ -8,11 +9,14 @@ import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
 
 public class Imaging {
 
     // TODO test to find the best maximum
     private static final int MAX_IMAGE_SIZE = 600; // 70;
+    private static final String IMAGE_FILENAME_PREFIX = "ad_photo_";
 
     public static Bitmap correctSizeForUploading(Bitmap source) {
         return correctSize(source, MAX_IMAGE_SIZE);
@@ -79,5 +83,36 @@ public class Imaging {
     public static Bitmap base64DecodeImage(String photoBase64) {
         byte[] bytes = Base64.decode(photoBase64, Base64.DEFAULT);
         return BitmapFactory.decodeByteArray(bytes, 0, bytes.length);
+    }
+
+    public static String writeImageFile(Context context, int adId, String photoBase64) {
+        ByteArrayOutputStream inStream = new ByteArrayOutputStream();
+        Bitmap image = base64DecodeImage(photoBase64);
+        image.compress(Bitmap.CompressFormat.JPEG, 80, inStream);
+
+        FileOutputStream outStream;
+        String filename = IMAGE_FILENAME_PREFIX + adId + ".jpg";
+
+        try {
+            outStream = context.openFileOutput(filename, Context.MODE_PRIVATE);
+            outStream.write(inStream.toByteArray());
+            outStream.close();
+        }
+        catch (Exception e) { e.printStackTrace(); }
+
+        return filename;
+    }
+
+    public static Bitmap readImageFile(Context context, String filename) {
+        try {
+            FileInputStream stream = context.openFileInput(filename);
+            byte[] bytes = new byte[stream.available()];
+            stream.read(bytes);
+            stream.close();
+            return BitmapFactory.decodeByteArray(bytes, 0, bytes.length);
+        }
+        catch (Exception e) { e.printStackTrace(); }
+
+        return null;
     }
 }

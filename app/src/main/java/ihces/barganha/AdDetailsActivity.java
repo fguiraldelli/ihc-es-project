@@ -66,7 +66,7 @@ public class AdDetailsActivity extends AppCompatActivity implements View.OnClick
                 ((TextView)findViewById(R.id.tv_title_value)).setText(ad.getTitle());
                 ((TextView)findViewById(R.id.tv_description_value)).setText(ad.getDescription());
                 ((TextView)findViewById(R.id.tv_price_value)).setText(ad.getPrice());
-                ((ImageView)findViewById(R.id.iv_photo)).setImageBitmap(Imaging.base64DecodeImage(ad.getPhotoBase64()));
+                ((ImageView)findViewById(R.id.iv_photo)).setImageBitmap(Imaging.readImageFile(AdDetailsActivity.this, ad.getFilename()));
 
                 ((ImageView)findViewById(R.id.iv_points)).setImageDrawable(getResources().getDrawable(adUser.getPointsDrawableId()));
             }

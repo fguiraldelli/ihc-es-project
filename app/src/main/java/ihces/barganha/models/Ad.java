@@ -16,6 +16,8 @@ public class Ad {
     @SerializedName("token")
     private String authToken;
 
+    private String filename;
+
     public Ad() { } // Enable Serialization
 
     public Ad(int id, String authToken, String title, String description, String price) {
@@ -77,5 +79,13 @@ public class Ad {
 
     public void setAuthToken(String authToken) {
         this.authToken = authToken;
+    }
+
+    public String getFilename() {
+        return filename;
+    }
+
+    public void setFilename(String filename) {
+        this.filename = filename;
     }
 }

@@ -14,6 +14,7 @@ import android.widget.Toast;
 import com.google.gson.Gson;
 
 import ihces.barganha.models.Ad;
+import ihces.barganha.photo.Imaging;
 import ihces.barganha.rest.AdService;
 import ihces.barganha.rest.ServiceResponseListener;
 
@@ -61,6 +62,10 @@ public class SearchResultsActivity extends AppCompatActivity {
     }
 
     private void openDetailsActivity(Ad ad) {
+        String filename = Imaging.writeImageFile(this, ad.getId(), ad.getPhotoBase64());
+        ad.setPhotoBase64("");
+        ad.setFilename(filename);
+
         Intent intent = new Intent(SearchResultsActivity.this, AdDetailsActivity.class);
         Gson gson = new Gson();
         String jsAd = gson.toJson(ad, Ad.class);
