@@ -62,9 +62,11 @@ public class SearchResultsActivity extends AppCompatActivity {
     }
 
     private void openDetailsActivity(Ad ad) {
-        String filename = Imaging.writeImageFile(this, ad.getId(), ad.getPhotoBase64());
-        ad.setPhotoBase64("");
-        ad.setFilename(filename);
+        if (ad.getFilename().length() == 0) {
+            String filename = Imaging.writeImageFile(this, ad.getId(), ad.getPhotoBase64());
+            ad.setPhotoBase64("");
+            ad.setFilename(filename);
+        }
 
         Intent intent = new Intent(SearchResultsActivity.this, AdDetailsActivity.class);
         Gson gson = new Gson();

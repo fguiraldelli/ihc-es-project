@@ -20,16 +20,19 @@ public class User {
     private int points = 3;
     @SerializedName("anuncios")
     private int ads = 0;
+    @SerializedName("celular")
+    private String cellPhone = "";
 
     public User() {} // Enable serialization
 
-    public User(String authToken, int collegeId) {
-        this(authToken, collegeId, 3, 0);
+    public User(String authToken, int collegeId, String cellPhone) {
+        this(authToken, collegeId, cellPhone, 3, 0);
     }
 
-    public User(String authToken, int collegeId, int points, int ads) {
+    public User(String authToken, int collegeId, String cellPhone, int points, int ads) {
         this.authToken = authToken;
         this.collegeId = collegeId;
+        this.cellPhone = cellPhone;
         this.points = points;
         this.ads = ads;
     }
@@ -74,7 +77,7 @@ public class User {
         String json = new Gson().toJson(user);
         SharedPreferences prefs = context.getSharedPreferences(USER_FILE_KEY,
                 Context.MODE_PRIVATE);
-        prefs.edit().putString(USER_PREF_KEY, json).commit();
+        prefs.edit().putString(USER_PREF_KEY, json).apply();
     }
 
     public static User getStoredLocal(Context context) {
@@ -105,5 +108,13 @@ public class User {
             }
         }
         return id;
+    }
+
+    public String getCellPhone() {
+        return cellPhone;
+    }
+
+    public void setCellPhone(String cellPhone) {
+        this.cellPhone = cellPhone;
     }
 }

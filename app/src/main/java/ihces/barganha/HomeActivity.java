@@ -20,24 +20,28 @@ import ihces.barganha.rest.UserService;
 
 public class HomeActivity extends AppCompatActivity {
 
+    private static final int ADVERTISE_REQUEST_CODE = 1000;
     AutoCompleteTextView tvSearchTerms;
     Button btSearch;
     Button btAdvertise;
     Button btMyAds;
+    UserService service;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
         setContentView(R.layout.activity_home);
+
+        service = new UserService();
+        service.start(getApplicationContext());
+        //service.setAsMock();
+
         setButtonEvents();
         setAvailableOptions();
     }
 
     private void setAvailableOptions() {
-        UserService service = new UserService();
-        service.start(getApplicationContext());
-        //service.setAsMock();
         service.getMyUser(User.getStoredLocal(this),
                 new ServiceResponseListener<User[]>() {
                     @Override
@@ -54,7 +58,7 @@ public class HomeActivity extends AppCompatActivity {
                             btnMyAdsLocal.setVisibility(View.VISIBLE);
                             tvPointsLabel.setVisibility(View.VISIBLE);
                             ivMyPoints.setVisibility(View.VISIBLE);
-                            tvLabelSelling.setVisibility(View.INVISIBLE);
+                            tvLabelSelling.setVisibility(View.GONE);
                             ivMyPoints.setImageDrawable(getResources().getDrawable(user.getPointsDrawableId()));
                         } else {
                             btnMyAdsLocal.setVisibility(View.INVISIBLE);
@@ -90,7 +94,8 @@ public class HomeActivity extends AppCompatActivity {
         btAdvertise.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(HomeActivity.this, AdvertiseActivity.class));
+                startActivityForResult(new Intent(HomeActivity.this, AdvertiseActivity.class),
+                        ADVERTISE_REQUEST_CODE);
             }
         });
 
@@ -112,6 +117,13 @@ public class HomeActivity extends AppCompatActivity {
                 finish();
             }
         });
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (requestCode == ADVERTISE_REQUEST_CODE && resultCode == RESULT_OK) {
+            setAvailableOptions();
+        }
     }
 
     private void openSearchResultActivity(String searchTerms) {

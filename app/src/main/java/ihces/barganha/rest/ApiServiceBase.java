@@ -60,8 +60,8 @@ public abstract class ApiServiceBase {
 
     @NonNull
     protected <T> JsonArrayRequest makeGetRequest(final Class<T> outClass,
-                                                   final ServiceResponseListener<T> listener,
-                                                   Map<String, String> params) {
+                                                  final ServiceResponseListener<T> listener,
+                                                  Map<String, String> params) {
         return new JsonArrayRequest(makeUrl(params),
                 new Response.Listener<JSONArray>() {
                     @Override
@@ -79,6 +79,32 @@ public abstract class ApiServiceBase {
         );
     }
 
+    protected JsonObjectRequest makePutRequest(final ServiceResponseListener<String> listener,
+                                               String urlParam,
+                                               JSONObject putData) {
+        return new JsonObjectRequestNoExpect(
+                Request.Method.PUT,
+                makeUrl(urlParam),
+                putData,
+                new Response.Listener<JSONObject>() {
+                    @Override
+                    public void onResponse(JSONObject response) {
+                        listener.onResponse(response.toString());
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        listener.onError(error);
+                    }
+                }
+        );
+    }
+
+    private String makeUrl(String urlParam) {
+        return makeUrl() + "/" + urlParam;
+    }
+
     protected String makeUrl(Map<String, String> params) {
         StringBuilder sBuilder = new StringBuilder();
         sBuilder.append(makeUrl() + GET_EXTENSION);
@@ -94,7 +120,6 @@ public abstract class ApiServiceBase {
                     sBuilder.append(URLEncoder.encode(entry.getKey(), "UTF-8"));
                     sBuilder.append("=");
                     sBuilder.append(URLEncoder.encode(entry.getValue(), "UTF-8"));
-                    // sBuilder.append(entry.getKey() + "=" + entry.getValue());
                 } catch (UnsupportedEncodingException e) {
                     e.printStackTrace();
                 }

@@ -9,7 +9,7 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="ihces.barganha.AdDetailsActivity"
+    tools:context="ihces.barganha.MyAdDetails"
     android:orientation="vertical">
 
     <LinearLayout
@@ -115,91 +115,49 @@
     </LinearLayout>
 
     <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center_vertical"
-        android:layout_marginTop="4dp"
-        android:layout_marginBottom="4dp">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/tv_points_label"
-            android:id="@+id/tv_points_label"
-            android:layout_gravity="center_vertical"
-            tools:ignore="InefficientWeight,LabelFor,NestedWeights"
-            android:elevation="1dp"
-            android:layout_weight="1"
-            android:gravity="start" />
-
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:srcCompat="@drawable/ic_mood_happy"
-            android:id="@+id/iv_points"
-            android:elevation="1dp"
-            android:layout_margin="4dp"
-            android:layout_weight="1.5" />
-
-    </LinearLayout>
-
-    <LinearLayout
         android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_weight="1"
-        android:visibility="visible">
+        android:visibility="visible"
+        android:layout_marginTop="10dp">
 
         <Button
-            android:text="@string/bt_contact_label"
+            android:text="@string/bt_mark_due_label"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/bt_contact"
+            android:id="@+id/bt_mark_due"
             android:layout_weight="1"
             android:visibility="visible" />
 
-        <TextView
-            android:text="12-3456-7890"
-            android:layout_width="wrap_content"
+        <TableRow
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/tv_contact"
             android:layout_weight="1"
-            android:visibility="gone"
-            android:textColor="?android:attr/textColorPrimary"
-            android:textSize="24sp"
-            android:textAlignment="center" />
-    </LinearLayout>
+            android:id="@+id/tr_due"
+            android:orientation="horizontal"
+            android:gravity="center"
+            android:background="@android:color/holo_green_dark"
+            android:padding="4dp"
+            android:visibility="gone">
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center_vertical"
-        android:layout_marginBottom="4dp"
-        android:layout_marginTop="4dp"
-        android:visibility="gone"
-        android:id="@+id/ll_evaluate">
+            <TextView
+                android:text="@string/tv_negocio_fechado"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/tv_due"
+                android:textAlignment="center"
+                android:textColor="@android:color/white"
+                android:textStyle="bold"
+                android:textSize="24sp" />
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/tv_evaluate_label"
-            android:id="@+id/tv_evaluate_label"
-            tools:ignore="InefficientWeight,LabelFor,NestedWeights"
-            android:elevation="1dp"
-            android:layout_gravity="center_vertical"
-            android:layout_weight="1" />
-
-        <ImageButton
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:srcCompat="@drawable/bt_thumb_up"
-            android:id="@+id/ibt_up" />
-
-        <ImageButton
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:srcCompat="@drawable/bt_thumb_down"
-            android:id="@+id/ibt_down" />
+            <ImageView
+                app:srcCompat="@drawable/handshake_light"
+                android:id="@+id/iv_due"
+                android:layout_height="40dp"
+                android:layout_width="50dp" />
+        </TableRow>
 
     </LinearLayout>
+
 </LinearLayout>

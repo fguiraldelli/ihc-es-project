@@ -1,11 +1,7 @@
 package ihces.barganha.rest;
 
-import android.util.Log;
-
 import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.JsonObjectRequest;
-import com.android.volley.toolbox.StringRequest;
-import com.google.gson.Gson;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -14,7 +10,6 @@ import java.util.HashMap;
 import java.util.Map;
 
 import ihces.barganha.models.Ad;
-import ihces.barganha.models.User;
 
 public class AdService extends ApiServiceBase {
 
@@ -62,6 +57,25 @@ public class AdService extends ApiServiceBase {
         Map<String, String> params = new HashMap<>();
         params.put("token", token);
         JsonArrayRequest request = makeGetRequest(Ad[].class, listener, params);
+        queue.add(request);
+    }
+
+    public void markClosed(String token, Ad ad, ServiceResponseListener<String> listener)
+    {
+        if (isMock) {
+            listener.onResponse("OK");
+            return;
+        }
+
+        JSONObject jo = new JSONObject();
+        try {
+            jo.put("negocio_fechado", true);
+            jo.put("token", ad.getAuthToken());
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        JsonObjectRequest request = makePutRequest(listener, String.valueOf(ad.getId()), jo);
         queue.add(request);
     }
 

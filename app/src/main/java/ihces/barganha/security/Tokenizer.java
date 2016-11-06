@@ -32,7 +32,7 @@ public class Tokenizer {
 
         try {
             SecretKey secretKey = generateKey(original.toCharArray(), getSalt(context));
-            finalHash = Base64.encodeToString(secretKey.getEncoded(), Base64.DEFAULT);
+            finalHash = Base64.encodeToString(secretKey.getEncoded(), Base64.URL_SAFE + Base64.NO_WRAP);
             writeHashFile(context, finalHash.getBytes());
         } catch (NoSuchAlgorithmException | InvalidKeySpecException e) {
             e.printStackTrace();

@@ -34,7 +34,7 @@ public class AdvertiseActivity extends AppCompatActivity {
     private static final int RESULT_IMAGE_CHOSEN = 1;
 
     // Make it a field so as to allow checking user locale in the future.
-    private String separator = ",";
+    private String separator = Ad.SEPARATOR;
     private ImageButton ibPhoto;
     private EditText etTitle;
     private EditText etDescription;
@@ -97,11 +97,13 @@ public class AdvertiseActivity extends AppCompatActivity {
                         @Override
                         public void onResponse(String response) {
                             Toast.makeText(AdvertiseActivity.this, getText(R.string.toast_post_ad_ok), Toast.LENGTH_LONG).show();
+                            setResult(RESULT_OK);
                             finish();
                         }
 
                         @Override
                         public void onError(Exception error) {
+                            setResult(RESULT_CANCELED);
                             Toast.makeText(AdvertiseActivity.this, getText(R.string.toast_post_ad_error), Toast.LENGTH_LONG).show();
                             Log.e("Advertise", "Couldn't POST ad to our API.", error);
                         }

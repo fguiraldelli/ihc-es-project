@@ -19,7 +19,7 @@ public class UserPointsService extends ApiServiceBase {
         return BASE_URL + RESOURCE;
     }
 
-    public void postEvaluation(String token, int id, char evaluation,
+    public void postEvaluation(String token, int id, String evaluation,
                                ServiceResponseListener<String> listener) {
         if (isMock) {
             listener.onResponse("OK");

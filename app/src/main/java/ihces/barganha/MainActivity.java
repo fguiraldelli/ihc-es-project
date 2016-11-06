@@ -4,7 +4,9 @@ import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.telephony.TelephonyManager;
 import android.util.Log;
+import android.widget.EditText;
 import android.widget.Toast;
 
 import com.facebook.AccessToken;
@@ -27,6 +29,7 @@ public class MainActivity extends AppCompatActivity {
     private static final int COLLEGE_ID_UFSCAR = 1;
 
     CallbackManager callbackManager;
+    private EditText etCellNumber;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,6 +50,8 @@ public class MainActivity extends AppCompatActivity {
         LoginButton loginButton = (LoginButton)findViewById(R.id.login_button);
         callbackManager = CallbackManager.Factory.create();
 
+        etCellNumber = (EditText) findViewById(R.id.et_cell_number);
+
         // Callback registration
         loginButton.registerCallback(callbackManager, new FacebookCallback<LoginResult>() {
             @Override
@@ -54,7 +59,9 @@ public class MainActivity extends AppCompatActivity {
                 String authToken = Tokenizer.generateSaltHashedKey(MainActivity.this,
                         loginResult.getAccessToken().getToken());
 
-                final User user = new User(authToken, COLLEGE_ID_UFSCAR);
+                String cellNumber = etCellNumber.getText().toString();
+
+                final User user = new User(authToken, COLLEGE_ID_UFSCAR, cellNumber);
 
                 UserService service = new UserService();
                 service.start(getApplicationContext());
