@@ -28,6 +28,7 @@ import ihces.barganha.models.User;
 import ihces.barganha.photo.Imaging;
 import ihces.barganha.rest.AdService;
 import ihces.barganha.rest.ServiceResponseListener;
+import utils.NumberTextWatcher;
 
 public class AdvertiseActivity extends AppCompatActivity {
 
@@ -124,7 +125,8 @@ public class AdvertiseActivity extends AppCompatActivity {
 
     private void setupPriceInput() {
         etPrice.setKeyListener(DigitsKeyListener.getInstance("0123456789" + separator));
-        etPrice.addTextChangedListener(new TextWatcher() {
+        etPrice.addTextChangedListener(new NumberTextWatcher(etPrice));
+        /*etPrice.addTextChangedListener(new TextWatcher() {
             String beforeText = "";
             String finalText = "";
             boolean changing = false;
@@ -180,7 +182,7 @@ public class AdvertiseActivity extends AppCompatActivity {
                     s.replace(0, s.length(), finalText);
                 }
             }
-        });
+        });*/
     }
 
     @Override
