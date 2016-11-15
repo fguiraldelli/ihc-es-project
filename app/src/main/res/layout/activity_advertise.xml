@@ -38,6 +38,7 @@
             android:layout_gravity="center"
             android:contentDescription="insert image here"
             tools:ignore="HardcodedText,VectorDrawableCompat"
+            android:scaleType="fitCenter"
             android:layout_height="200dp"
             app:srcCompat="@drawable/ic_photo"
             android:cropToPadding="true"
