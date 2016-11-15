@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="college_names">
+        <item>UFSCar Sorocaba</item>
+        <item>Anhanguera</item>
+        <item>FATEC Sorocaba</item>
+    </string-array>
+    <integer-array name="college_ids"> <!-- Always follow position from string-array "college_names" -->
+        <item>1</item> <!-- UFSCar -->
+        <item>2</item> <!-- Anhanguera -->
+        <item>3</item> <!-- FATEC -->
+    </integer-array>
+</resources>

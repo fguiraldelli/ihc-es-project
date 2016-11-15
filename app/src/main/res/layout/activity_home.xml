@@ -13,6 +13,15 @@
         android:layout_height="match_parent"
         android:gravity="bottom">
 
+        <TextView
+            android:text="Bem vindo!"
+            android:layout_width="match_parent"
+            android:id="@+id/tv_greeting"
+            android:textSize="18sp"
+            android:layout_height="60dp"
+            android:layout_margin="10dp"
+            android:textAlignment="textStart" />
+
         <LinearLayout
             android:orientation="horizontal"
             android:layout_width="match_parent"
@@ -36,7 +45,7 @@
 
         <TableRow
             android:layout_width="match_parent"
-            android:background="@android:color/holo_blue_dark"
+            android:background="@color/colorPrimaryDark"
             android:layout_margin="10dp"
             android:layout_height="1dp" />
 
@@ -53,14 +62,18 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/btn_advertise"
-            android:text="@string/btn_advertise" />
+            android:text="@string/btn_advertise"
+            android:textColor="@android:color/white"
+            android:backgroundTint="@color/colorPrimary" />
 
         <Button
             android:text="@string/btn_my_ads"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/btn_my_ads"
-            android:visibility="invisible" />
+            android:visibility="invisible"
+            android:background="@color/colorPrimary"
+            android:textColor="@android:color/white" />
 
         <LinearLayout
             android:orientation="horizontal"
@@ -91,7 +104,7 @@
 
         <TableRow
             android:layout_width="match_parent"
-            android:background="@android:color/holo_blue_dark"
+            android:background="@color/colorPrimaryDark"
             android:layout_height="1dp"
             android:layout_marginRight="10dp"
             android:layout_marginLeft="10dp"
@@ -104,7 +117,6 @@
             android:layout_margin="5dp">
 
             <Button
-                android:layout_height="wrap_content"
                 android:id="@+id/bt_logout"
                 android:layout_gravity="bottom|start"
                 android:elevation="1dp"
@@ -113,7 +125,8 @@
                 android:text="@string/bt_logout_label"
                 android:layout_weight="0"
                 android:layout_width="72dp"
-                android:textAllCaps="false" />
+                android:textAllCaps="false"
+                android:layout_height="32dp" />
 
             <TextView
                 android:text="@string/lobout_explanation"
@@ -124,7 +137,7 @@
                 android:textStyle="italic"
                 android:layout_gravity="center_vertical"
                 android:textAlignment="viewStart"
-                android:layout_marginLeft="5dp"
+                android:layout_marginLeft="10dp"
                 android:layout_marginRight="5dp"
                 android:textColor="@color/com_facebook_device_auth_text" />
 

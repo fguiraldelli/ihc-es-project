@@ -90,7 +90,8 @@
             android:id="@+id/bt_cancel"
 
             android:layout_weight="1"
-            tools:ignore="ButtonStyle,NestedWeights,RtlHardcoded" />
+            tools:ignore="ButtonStyle,NestedWeights,RtlHardcoded"
+            android:textColor="@color/colorPrimaryDark" />
 
         <Button
             android:text="Anunciar"
@@ -100,7 +101,9 @@
             android:layout_marginLeft="15dp"
             android:id="@+id/btn_save"
             android:layout_weight="1"
-            tools:ignore="ButtonStyle,HardcodedText,RtlHardcoded" />
+            tools:ignore="ButtonStyle,HardcodedText,RtlHardcoded"
+            android:textColor="@android:color/white"
+            android:backgroundTint="@color/colorPrimary" />
     </LinearLayout>
 
 </LinearLayout>

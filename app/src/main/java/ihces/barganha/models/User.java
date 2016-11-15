@@ -12,29 +12,41 @@ public class User {
 
     private static final String USER_FILE_KEY = "loggedUser.pref";
     private static final String USER_PREF_KEY = "user";
+    public static final String GENDER_FEMALE = "female";
+    public static final String GENDER_MALE = "male";
 
     @SerializedName("token")
     private String authToken = "";
-    private transient int collegeId = 1;
+    @SerializedName("id_insituicao")
+    private int collegeId = 1;
     @SerializedName("pontos")
     private int points = 3;
     @SerializedName("anuncios")
     private int ads = 0;
     @SerializedName("celular")
     private String cellPhone = "";
+    @SerializedName("nome")
+    private String name;
+    @SerializedName("sexo")
+    private String gender;
+    @SerializedName("id_facebook")
+    private int facebookId;
+
+    public User(String authToken, int collegeId, int points, int ads, String cellPhone, String name, String gender, int facebookId) {
+        this.authToken = authToken;
+        this.collegeId = collegeId;
+        this.points = points;
+        this.ads = ads;
+        this.cellPhone = cellPhone;
+        this.name = name;
+        this.gender = gender;
+        this.facebookId = facebookId;
+    }
 
     public User() {} // Enable serialization
 
-    public User(String authToken, int collegeId, String cellPhone) {
-        this(authToken, collegeId, cellPhone, 3, 0);
-    }
-
-    public User(String authToken, int collegeId, String cellPhone, int points, int ads) {
-        this.authToken = authToken;
-        this.collegeId = collegeId;
-        this.cellPhone = cellPhone;
-        this.points = points;
-        this.ads = ads;
+    public User(String authToken, int collegeId, String cellPhone, String name, String gender, int facebookId) {
+        this(authToken, collegeId, 3, 0, cellPhone, name, gender, facebookId);
     }
 
     public String getAuthToken() {
@@ -116,5 +128,33 @@ public class User {
 
     public void setCellPhone(String cellPhone) {
         this.cellPhone = cellPhone;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getGender() {
+        return gender;
+    }
+
+    public void setGender(String gender) {
+        this.gender = gender;
+    }
+
+    public boolean isFemale() {
+        return this.gender == GENDER_FEMALE;
+    }
+
+    public int getFacebookId() {
+        return facebookId;
+    }
+
+    public void setFacebookId(int facebookId) {
+        this.facebookId = facebookId;
     }
 }

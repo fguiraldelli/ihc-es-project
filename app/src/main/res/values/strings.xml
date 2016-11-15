@@ -39,4 +39,7 @@
     <string name="title_activity_my_ad_details">Detalhes do meu anúncio</string>
     <string name="bt_mark_due_label">Já Fechei Negócio!</string>
     <string name="tv_negocio_fechado">Negócio Fechado!</string>
+    <string name="tv_college_label">Universidade:</string>
+    <string name="greeting_welcome" >Bem vind%1$s, &lt;b>&lt;big>%2$s&lt;/big>&lt;/b>!</string>
+    <string name="greeting_hello">Olá, &lt;b>%1$s&lt;/b>!</string>
 </resources>

@@ -20,28 +20,32 @@
         android:id="@+id/iv_logo"
         android:adjustViewBounds="true"
         android:cropToPadding="false"
-        android:scaleType="centerInside" />
+        android:scaleType="centerInside"
+        tools:ignore="ContentDescription" />
 
-    <RadioButton
-        android:text="UFSCar Sorocaba (piloto)"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/cbCollegeTemp"
-        android:checked="true"
-        android:focusable="false"
-        android:clickable="false"
-        android:layout_below="@+id/iv_logo"
+    <Spinner
         android:layout_alignParentEnd="true"
-        android:layout_marginTop="10dp" />
-
-    <TextView
-        android:text="Universidade:"
+        android:layout_marginTop="10dp"
+        android:layout_below="@+id/iv_logo"
+        android:id="@+id/sp_college"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/textView"
-        android:layout_alignBaseline="@+id/cbCollegeTemp"
-        android:layout_alignBottom="@+id/cbCollegeTemp"
-        android:layout_toStartOf="@+id/cbCollegeTemp" />
+        android:entries="@array/college_names"
+        android:spinnerMode="dialog"
+        android:layout_toEndOf="@+id/textView" />
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:inputType="phone"
+        android:ems="10"
+        android:id="@+id/et_cell_number"
+        android:hint="@string/et_cell_number_label"
+        android:textAlignment="viewEnd"
+        android:layout_below="@+id/sp_college"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="10dp"
+        android:textColor="?android:attr/textColorPrimary" />
 
     <com.facebook.login.widget.LoginButton
         android:id="@+id/login_button"
@@ -54,16 +58,13 @@
         android:layout_alignParentStart="true"
         android:layout_marginTop="10dp" />
 
-    <EditText
-        android:layout_width="match_parent"
+    <TextView
+        android:text="@string/tv_college_label"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:inputType="phone"
-        android:ems="10"
-        android:id="@+id/et_cell_number"
-        android:hint="@string/et_cell_number_label"
-        android:textAlignment="viewEnd"
-        android:layout_below="@+id/cbCollegeTemp"
-        android:layout_alignParentStart="true"
-        android:layout_marginTop="10dp" />
+        android:id="@+id/textView"
+        android:layout_alignBaseline="@+id/sp_college"
+        android:layout_alignBottom="@+id/sp_college"
+        android:layout_alignParentStart="true" />
 
 </RelativeLayout>

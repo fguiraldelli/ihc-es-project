@@ -16,6 +16,7 @@ import javax.crypto.SecretKey;
 import javax.crypto.SecretKeyFactory;
 import javax.crypto.spec.PBEKeySpec;
 
+@Deprecated
 public class Tokenizer {
 
     private static final String ALGORITHM = "PBKDF2WithHmacSHA1";

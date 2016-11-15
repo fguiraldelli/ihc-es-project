@@ -2,10 +2,14 @@ package ihces.barganha;
 
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
+import android.content.res.Resources;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.text.Html;
 import android.util.Log;
 import android.view.View;
+import android.widget.Adapter;
+import android.widget.AdapterView;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -25,7 +29,9 @@ public class HomeActivity extends AppCompatActivity {
     Button btSearch;
     Button btAdvertise;
     Button btMyAds;
+    TextView tvGreeting;
     UserService service;
+    User user;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,22 +43,71 @@ public class HomeActivity extends AppCompatActivity {
         service.start(getApplicationContext());
         //service.setAsMock();
 
+        user = User.getStoredLocal(this);
+
         setButtonEvents();
         setAvailableOptions();
+
+        setAutoComplete();
+    }
+
+    private void setAutoComplete() {
+        final AutoCompleteSearchAdapter spAdapter = new AutoCompleteSearchAdapter(this, R.layout.autocomplete_item);
+        tvSearchTerms.setAdapter(spAdapter);
+        tvSearchTerms.setThreshold(spAdapter.THRESHOLD);
+        tvSearchTerms.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
+                String suggestion = (String) adapterView.getItemAtPosition(position);
+                String contents = spAdapter.getOriginalText();
+                int lastSpace = Math.max(0, contents.lastIndexOf(" ") + 1);
+                String textToSet = contents.substring(0, lastSpace) + suggestion + " ";
+                tvSearchTerms.setText(textToSet);
+                tvSearchTerms.setSelection(textToSet.length());
+            }
+        });
+    }
+
+    private void setGreeting(boolean isNew) {
+        tvGreeting = (TextView) findViewById(R.id.tv_greeting);
+        String formatted;
+        Resources resources = getResources();
+
+        if (isNew) {
+            formatted = String.format(resources.getString(R.string.greeting_welcome), getGenderChar(), user.getName());
+        } else {
+            formatted = String.format(resources.getString(R.string.greeting_hello), user.getName());
+        }
+
+        CharSequence styledText = Html.fromHtml(formatted);
+        tvGreeting.setText(styledText);
+    }
+
+    private String getGenderChar() {
+        if (user.isFemale()) {
+            return "a";
+        }
+        return "o";
     }
 
     private void setAvailableOptions() {
-        service.getMyUser(User.getStoredLocal(this),
+        service.getMyUser(user,
                 new ServiceResponseListener<User[]>() {
                     @Override
                     public void onResponse(User[] response) {
-                        User user = response[0];
+                        User responseUser = response[0];
+
+                        user.setAds(responseUser.getAds());
+                        user.setPoints(responseUser.getPoints());
+
                         User.storeLocal(HomeActivity.this, user);
 
-                        final TextView tvLabelSelling = (TextView)findViewById(R.id.tv_label_selling);
-                        final Button btnMyAdsLocal = (Button)findViewById(R.id.btn_my_ads);
-                        final TextView tvPointsLabel = (TextView)findViewById(R.id.tv_points_label);
-                        final ImageView ivMyPoints = (ImageView)findViewById(R.id.iv_my_points);
+                        setGreeting(user.isHasAds());
+
+                        TextView tvLabelSelling = (TextView)findViewById(R.id.tv_label_selling);
+                        Button btnMyAdsLocal = (Button)findViewById(R.id.btn_my_ads);
+                        TextView tvPointsLabel = (TextView)findViewById(R.id.tv_points_label);
+                        ImageView ivMyPoints = (ImageView)findViewById(R.id.iv_my_points);
 
                         if (user.isHasAds()) {
                             btnMyAdsLocal.setVisibility(View.VISIBLE);
@@ -83,7 +138,7 @@ public class HomeActivity extends AppCompatActivity {
         btSearch.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String searchTerms = tvSearchTerms.getText().toString();
+                String searchTerms = tvSearchTerms.getText().toString().trim();
                 if (!searchTerms.trim().isEmpty()) {
                     openSearchResultActivity(searchTerms);
                 }
