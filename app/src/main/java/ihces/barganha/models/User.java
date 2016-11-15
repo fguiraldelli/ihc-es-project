@@ -12,8 +12,8 @@ public class User {
 
     private static final String USER_FILE_KEY = "loggedUser.pref";
     private static final String USER_PREF_KEY = "user";
-    public static final String GENDER_FEMALE = "female";
-    public static final String GENDER_MALE = "male";
+    public static final String GENDER_FEMALE_FACEBOOK = "female";
+    public static final String GENDER_MALE_FACEBOOK = "male";
 
     @SerializedName("token")
     private String authToken = "";
@@ -147,7 +147,7 @@ public class User {
     }
 
     public boolean isFemale() {
-        return this.gender == GENDER_FEMALE;
+        return this.gender == GENDER_FEMALE_FACEBOOK;
     }
 
     public int getFacebookId() {

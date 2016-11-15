@@ -27,7 +27,7 @@ public class AutoCompleteSearchAdapter extends ArrayAdapter<String> implements F
         super(context, textViewResourceId);
         service = new AutoCompleteService();
         service.start(context);
-        service.setAsMock();
+        //service.setAsMock();
         suggestions = new ArrayList<>();
         originalText = "";
     }
@@ -95,8 +95,7 @@ public class AutoCompleteSearchAdapter extends ArrayAdapter<String> implements F
 
                 if(results != null && results.count > 0) {
                     notifyDataSetChanged();
-                }
-                else {
+                } else {
                     notifyDataSetInvalidated();
                 }
             }

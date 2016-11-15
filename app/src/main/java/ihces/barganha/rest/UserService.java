@@ -40,7 +40,7 @@ public class UserService extends ApiServiceBase {
 
     public void getUser(String token, ServiceResponseListener<User[]> listener) {
         if (isMock) {
-            User user = new User(token, 1, 5, 1, "55 11 5555 0000", "Persona1", User.GENDER_FEMALE, 12345789);
+            User user = new User(token, 1, 5, 1, "55 11 5555 0000", "Persona1", User.GENDER_FEMALE_FACEBOOK, 12345789);
             listener.onResponse(new User[]{user});
             return;
         }

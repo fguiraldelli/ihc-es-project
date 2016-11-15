@@ -41,7 +41,6 @@ public class HomeActivity extends AppCompatActivity {
 
         service = new UserService();
         service.start(getApplicationContext());
-        //service.setAsMock();
 
         user = User.getStoredLocal(this);
 
@@ -167,7 +166,7 @@ public class HomeActivity extends AppCompatActivity {
             public void onClick(View v) {
                 LoginManager.getInstance().logOut();
                 AccessToken.setCurrentAccessToken(null);
-                Log.d("HOME", "TESTE - Logged Out of Facebook.");
+                Log.d("HOME", "Logged Out of Facebook.");
                 startActivity(new Intent(HomeActivity.this, MainActivity.class));
                 finish();
             }
