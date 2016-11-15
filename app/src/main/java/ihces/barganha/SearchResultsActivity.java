@@ -52,6 +52,8 @@ public class SearchResultsActivity extends AppCompatActivity {
                             }
                         }
                 );
+                /*Stops animated circle*/
+                findViewById(R.id.loadingPanel).setVisibility(View.GONE);
             }
 
             @Override

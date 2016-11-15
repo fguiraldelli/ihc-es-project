@@ -47,6 +47,9 @@ public class MyAdsList extends Activity {
                             }
                         }
                 );
+
+                /*Stops animated circle*/
+                findViewById(R.id.loadingPanel).setVisibility(View.GONE);
             }
 
             @Override
