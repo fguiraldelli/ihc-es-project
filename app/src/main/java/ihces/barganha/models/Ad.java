@@ -24,6 +24,8 @@ public class Ad {
     private String description;
     @SerializedName("preco")
     private String price;
+    @SerializedName("meuspontos")
+    private int points;
     @SerializedName("imagem")
     private String photoBase64;
     @SerializedName("token")
@@ -178,5 +180,13 @@ public class Ad {
                 MY_DUE_AD_FILE_KEY,
                 Context.MODE_PRIVATE);
         return prefs.getBoolean(AD_ID_PREF_KEY + ad.getId(), false);
+    }
+
+    public int getPoints() {
+        return points;
+    }
+
+    public void setPoints(int points) {
+        this.points = points;
     }
 }

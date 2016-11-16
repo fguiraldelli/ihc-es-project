@@ -16,6 +16,13 @@
         android:layout_alignParentStart="true"
         android:scaleType="fitCenter" />
 
+    <View
+        android:layout_width="1dp"
+        android:layout_height="100dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginStart="125dp"
+        android:background="#cacaca" />
+
     <TextView
         android:text="TextView"
         android:paddingTop="10dp"
@@ -24,9 +31,9 @@
         android:id="@+id/row_description"
         tools:text="Description"
         android:layout_alignStart="@+id/row_title"
-        android:layout_alignEnd="@+id/row_price"
         android:layout_alignBottom="@+id/row_image"
-        android:layout_below="@+id/row_title" />
+        android:layout_below="@+id/row_title"
+        android:layout_toStartOf="@+id/row_price" />
 
     <TextView
         android:text="TextView"
@@ -47,4 +54,21 @@
         android:layout_alignTop="@+id/row_image"
         android:layout_centerHorizontal="true" />
 
+    <View
+        android:layout_width="fill_parent"
+        android:layout_height="1dp"
+        android:layout_marginTop="120dp"
+        android:background="#cacaca" />
+
+    <ImageView
+        android:layout_width="@dimen/iv_classification"
+        android:layout_height="@dimen/iv_classification"
+        app:srcCompat="@drawable/ic_mood_happy"
+        android:id="@+id/iv_my_points"
+        android:elevation="1dp"
+        android:visibility="invisible"
+        android:layout_below="@+id/row_price"
+        android:layout_alignEnd="@+id/row_price"
+        android:layout_marginEnd="18dp"
+        android:layout_marginTop="24dp" />
 </RelativeLayout>
