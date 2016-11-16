@@ -4,5 +4,8 @@
     <dimen name="activity_vertical_margin">16dp</dimen>
     <dimen name="fab_margin">16dp</dimen>
     <dimen name="iv_classification">30dp</dimen>
+    <dimen name="bt_square_large">140dp</dimen>
+    <dimen name="ad_square_mid">100dp</dimen>
+    <dimen name="bt_square_mid">110dp</dimen>
     <item name="home_buttons_margin" type="dimen">40%</item>
 </resources>

@@ -1,0 +1,177 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
+    tools:context="ihces.barganha.HomeActivity">
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center">
+
+        <TextView
+            android:text="Bem vindo!"
+            android:layout_width="match_parent"
+            android:id="@+id/tv_greeting"
+            android:textSize="18sp"
+            android:textAlignment="textStart"
+            android:layout_height="50dp"
+            android:layout_margin="10dp" />
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center">
+
+            <Button
+                android:text="@string/bt_saved_label"
+                android:layout_width="@dimen/bt_square_mid"
+                android:layout_height="@dimen/bt_square_mid"
+                android:id="@+id/bt_saved"
+                android:backgroundTint="@color/colorPrimary"
+                android:textColor="@android:color/white"
+                android:drawablePadding="8dp"
+                android:drawableTop="@drawable/bookmarks"
+                android:textSize="12sp" />
+
+            <Button
+                android:id="@+id/btn_my_negotiations"
+                android:text="@string/bt_negotiating_label"
+                android:textColor="@android:color/white"
+                android:drawableTop="@drawable/negotiate"
+                android:drawablePadding="5dp"
+                android:backgroundTint="@color/colorPrimary"
+                android:layout_height="@dimen/bt_square_mid"
+                android:layout_width="@dimen/bt_square_mid"
+                android:textSize="12sp" />
+
+            <Button
+                android:text="@string/bt_recent_label"
+                android:layout_width="@dimen/bt_square_mid"
+                android:layout_height="@dimen/bt_square_mid"
+                android:id="@+id/bt_recent"
+                android:backgroundTint="@color/colorPrimary"
+                android:textColor="@android:color/white"
+                android:drawableTop="@drawable/recent"
+                android:drawablePadding="0dp"
+                android:textSize="12sp" />
+
+        </LinearLayout>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:background="@color/colorPrimaryDark"
+            android:layout_margin="10dp"
+            android:layout_height="1dp" />
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <AutoCompleteTextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:id="@+id/tv_search_terms"
+                android:layout_weight="1"
+                android:hint="@string/tv_search_terms_hint"
+                android:layout_marginLeft="5dp" />
+
+            <Button
+                android:layout_width="50dp"
+                android:layout_height="wrap_content"
+                android:id="@+id/btn_search"
+                android:background="@drawable/btn_pesquisar_icon"
+                style="@android:style/Widget.Holo.Light.Button"
+                android:layout_marginRight="5dp" />
+
+        </LinearLayout>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:background="@color/colorPrimaryDark"
+            android:layout_margin="10dp"
+            android:layout_height="1dp" />
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center">
+
+            <Button
+                android:id="@+id/btn_advertise"
+                android:text="@string/btn_advertise"
+                android:textColor="@android:color/white"
+                android:drawableTop="@drawable/advertise"
+                android:drawablePadding="5dp"
+                android:backgroundTint="@color/colorPrimary"
+                android:layout_height="@dimen/bt_square_mid"
+                android:layout_width="@dimen/bt_square_mid"
+                android:textSize="12sp" />
+
+            <Button
+                android:id="@+id/btn_my_ads"
+                android:text="@string/btn_my_ads"
+                android:textColor="@android:color/white"
+                android:drawableTop="@drawable/my_ads"
+                android:drawablePadding="5dp"
+                android:backgroundTint="@color/colorPrimary"
+                android:layout_height="@dimen/bt_square_mid"
+                android:layout_width="@dimen/bt_square_mid"
+                android:textSize="12sp" />
+
+            <Button
+                android:text="@string/bt_trending_ads_label"
+                android:layout_width="@dimen/bt_square_mid"
+                android:layout_height="@dimen/bt_square_mid"
+                android:id="@+id/bt_trending_ads"
+                android:backgroundTint="@color/colorPrimary"
+                android:textColor="@android:color/white"
+                android:drawableTop="@drawable/trending"
+                android:drawablePadding="5dp"
+                android:textSize="12sp" />
+
+        </LinearLayout>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:background="@color/colorPrimaryDark"
+            android:layout_margin="10dp"
+            android:layout_height="1dp" />
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical|center"
+            android:layout_marginTop="10dp">
+
+            <TextView
+                android:text="@string/tv_my_points_label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/tv_points_label"
+                android:visibility="visible"
+                android:textSize="18sp"
+                android:elevation="1dp"
+                android:layout_marginLeft="5dp" />
+
+            <ImageView
+                android:layout_width="@dimen/iv_classification"
+                android:layout_height="@dimen/iv_classification"
+                app:srcCompat="@drawable/ic_mood_happy"
+                android:id="@+id/iv_my_points"
+                android:elevation="1dp"
+                android:visibility="visible"
+                android:layout_margin="5dp" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+</android.support.design.widget.CoordinatorLayout>

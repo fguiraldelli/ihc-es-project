@@ -71,9 +71,9 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/btn_my_ads"
-            android:visibility="invisible"
-            android:background="@color/colorPrimary"
-            android:textColor="@android:color/white" />
+            android:visibility="visible"
+            android:textColor="@android:color/white"
+            android:backgroundTint="@color/colorPrimary" />
 
         <LinearLayout
             android:orientation="horizontal"
@@ -87,7 +87,7 @@
                 android:layout_width="173dp"
                 android:layout_height="wrap_content"
                 android:id="@+id/tv_points_label"
-                android:visibility="invisible"
+                android:visibility="visible"
                 android:textSize="18sp"
                 android:elevation="1dp"
                 android:layout_marginLeft="5dp" />
@@ -98,7 +98,7 @@
                 app:srcCompat="@drawable/ic_mood_happy"
                 android:id="@+id/iv_my_points"
                 android:elevation="1dp"
-                android:visibility="invisible" />
+                android:visibility="visible" />
 
         </LinearLayout>
 

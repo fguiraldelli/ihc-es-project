@@ -19,7 +19,7 @@
     <string name="input_price">Preço</string>
     <string name="input_title">Título</string>
     <string name="tv_search_terms_default">(nenhum termo definido)</string>
-    <string name="tv_selling_label">Ou talvez você queira anunciar algo &#8230;</string>
+    <string name="tv_selling_label">Ou talvez você queira vender algo &#8230;</string>
     <string name="toast_post_ad_error">Houve um problema ao publicar o anúncio. Tente mais tarde ou entre em contato conosco pela Play Store.</string>
     <string name="toast_post_ad_ok">Seu anúncio foi publicado.</string>
 
@@ -32,14 +32,20 @@
 
     <string name="tv_points_label">Classificação do anunciante:</string>
     <string name="tv_evaluate_label">Avaliar o anunciante:</string>
-    <string name="bt_contact_label">Exibir Número Para Contato</string>
+    <string name="bt_contact_label">Negociar</string>
     <string name="et_cell_number_label">Informe o número do celular</string>
     <string name="bt_logout_label">Sair</string>
     <string name="lobout_explanation">Desassocia o aplicativo da sua conta do Facebook neste celular.</string>
     <string name="title_activity_my_ad_details">Detalhes do meu anúncio</string>
-    <string name="bt_mark_due_label">Já Fechei Negócio!</string>
+    <string name="bt_mark_due_label">Fechar Negócio</string>
     <string name="tv_negocio_fechado">Negócio Fechado!</string>
     <string name="tv_college_label">Universidade:</string>
     <string name="greeting_welcome" >Bem vind%1$s, &lt;b>&lt;big>%2$s&lt;/big>&lt;/b>!</string>
     <string name="greeting_hello">Olá, &lt;b>%1$s&lt;/b>!</string>
+    <string name="bt_trending_ads_label">Anúncios em alta</string>
+    <string name="tv_trending_label">Anúncios em alta:</string>
+    <string name="bt_more">Ver mais</string>
+    <string name="bt_recent_label">Buscas recentes</string>
+    <string name="bt_negotiating_label">Negociando</string>
+    <string name="bt_saved_label">Anúncios salvos</string>
 </resources>
