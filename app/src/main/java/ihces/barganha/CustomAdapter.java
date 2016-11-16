@@ -70,11 +70,10 @@ public class CustomAdapter extends BaseAdapter{
         priceText.setText(currentAd.getPrice());
         descriptionText.setText(currentAd.getDescription());
         itemImage.setImageBitmap(Imaging.base64DecodeImage(currentAd.getPhotoBase64()));
+        ivPoints.setVisibility(View.VISIBLE);
         ivPoints.setImageDrawable(context.getResources().getDrawable(user.getPointsDrawableId()));
 
         return customView;
 
     }
-
-
 }
