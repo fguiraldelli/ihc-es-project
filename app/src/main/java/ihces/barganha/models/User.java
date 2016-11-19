@@ -17,7 +17,7 @@ public class User {
 
     @SerializedName("token")
     private String authToken = "";
-    @SerializedName("id_insituicao")
+    @SerializedName("id_instituicao")
     private int collegeId = 1;
     @SerializedName("pontos")
     private int points = 3;
