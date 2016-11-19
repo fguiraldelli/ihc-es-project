@@ -71,6 +71,7 @@ public class CustomAdapter extends BaseAdapter{
         descriptionText.setText(currentAd.getDescription());
         itemImage.setImageBitmap(Imaging.base64DecodeImage(currentAd.getPhotoBase64()));
         ivPoints.setImageDrawable(context.getResources().getDrawable(user.getPointsDrawableId()));
+        ivPoints.setVisibility(View.VISIBLE);
 
         return customView;
 

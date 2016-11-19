@@ -5,8 +5,12 @@ import android.content.pm.ActivityInfo;
 import android.content.res.Resources;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.text.Html;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Adapter;
 import android.widget.AdapterView;
@@ -37,7 +41,10 @@ public class HomeActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
-        setContentView(R.layout.activity_home);
+        setContentView(R.layout.activity_home_full);
+
+        Toolbar myToolbar = (Toolbar) findViewById(R.id.my_toolbar);
+        setSupportActionBar(myToolbar);
 
         service = new UserService();
         service.start(getApplicationContext());
@@ -115,7 +122,7 @@ public class HomeActivity extends AppCompatActivity {
                             tvLabelSelling.setVisibility(View.GONE);
                             ivMyPoints.setImageDrawable(getResources().getDrawable(user.getPointsDrawableId()));
                         } else {
-                            btnMyAdsLocal.setVisibility(View.INVISIBLE);
+                            btnMyAdsLocal.setVisibility(View.GONE);
                             tvPointsLabel.setVisibility(View.INVISIBLE);
                             ivMyPoints.setVisibility(View.INVISIBLE);
                             tvLabelSelling.setVisibility(View.VISIBLE);
@@ -160,17 +167,6 @@ public class HomeActivity extends AppCompatActivity {
                 startActivity(new Intent(HomeActivity.this, MyAdsList.class));
             }
         });
-
-        findViewById(R.id.bt_logout).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                LoginManager.getInstance().logOut();
-                AccessToken.setCurrentAccessToken(null);
-                Log.d("HOME", "Logged Out of Facebook.");
-                startActivity(new Intent(HomeActivity.this, MainActivity.class));
-                finish();
-            }
-        });
     }
 
     @Override
@@ -184,6 +180,26 @@ public class HomeActivity extends AppCompatActivity {
         Intent intent = new Intent(HomeActivity.this, SearchResultsActivity.class);
         intent.putExtra(SearchResultsActivity.SEARCH_TERMS_EXTRA_KEY, searchTerms);
         startActivity(intent);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.action_settings:
+                startActivity(new Intent(HomeActivity.this, SettingsActivity.class));
+                return true;
+
+            default:
+                return super.onOptionsItemSelected(item);
+
+        }
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.home_menu, menu);
+        return true;
     }
 
 }

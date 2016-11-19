@@ -24,11 +24,11 @@
     <string name="toast_post_ad_ok">Seu anúncio foi publicado.</string>
 
     <!-- Activity titles -->
-    <string name="title_activity_main">Bem-vindo!</string>
     <string name="title_activity_advertise">Anunciar</string>
     <string name="title_activity_results">Resultados da busca</string>
     <string name="title_activity_my_ads">Meus anúncios</string>
     <string name="title_activity_ad_details">Detalhes do anúncio</string>
+    <string name="title_activity_settings">Configurações</string>
 
     <string name="tv_points_label">Classificação do anunciante:</string>
     <string name="tv_evaluate_label">Avaliar o anunciante:</string>
@@ -40,12 +40,12 @@
     <string name="bt_mark_due_label">Fechar Negócio</string>
     <string name="tv_negocio_fechado">Negócio Fechado!</string>
     <string name="tv_college_label">Universidade:</string>
-    <string name="greeting_welcome" >Bem vind%1$s, &lt;b>&lt;big>%2$s&lt;/big>&lt;/b>!</string>
+    <string name="greeting_welcome">Bem vind%1$s, &lt;b>&lt;big>%2$s&lt;/big>&lt;/b>!</string>
     <string name="greeting_hello">Olá, &lt;b>%1$s&lt;/b>!</string>
     <string name="bt_trending_ads_label">Anúncios em alta</string>
     <string name="tv_trending_label">Anúncios em alta:</string>
     <string name="bt_more">Ver mais</string>
     <string name="bt_recent_label">Buscas recentes</string>
-    <string name="bt_negotiating_label">Negociando</string>
+    <string name="bt_negotiating_label">Em Negociação</string>
     <string name="bt_saved_label">Anúncios salvos</string>
 </resources>

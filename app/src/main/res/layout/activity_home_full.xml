@@ -7,6 +7,16 @@
     android:fitsSystemWindows="true"
     tools:context="ihces.barganha.HomeActivity">
 
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/my_toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="?attr/colorPrimary"
+        android:textColor="@android:color/white"
+        android:elevation="4dp"
+        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+        app:popupTheme="@style/ThemeOverlay.AppCompat.Light"/>
+
     <LinearLayout
         android:orientation="vertical"
         android:layout_width="match_parent"
@@ -37,7 +47,8 @@
                 android:textColor="@android:color/white"
                 android:drawablePadding="8dp"
                 android:drawableTop="@drawable/bookmarks"
-                android:textSize="12sp" />
+                android:textSize="12sp"
+                android:visibility="visible" />
 
             <Button
                 android:id="@+id/btn_my_negotiations"
@@ -48,7 +59,8 @@
                 android:backgroundTint="@color/colorPrimary"
                 android:layout_height="@dimen/bt_square_mid"
                 android:layout_width="@dimen/bt_square_mid"
-                android:textSize="12sp" />
+                android:textSize="12sp"
+                android:visibility="visible" />
 
             <Button
                 android:text="@string/bt_recent_label"
@@ -59,7 +71,8 @@
                 android:textColor="@android:color/white"
                 android:drawableTop="@drawable/recent"
                 android:drawablePadding="0dp"
-                android:textSize="12sp" />
+                android:textSize="12sp"
+                android:visibility="visible" />
 
         </LinearLayout>
 
@@ -98,6 +111,15 @@
             android:layout_margin="10dp"
             android:layout_height="1dp" />
 
+        <TextView
+            android:text="@string/tv_selling_label"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/tv_label_selling"
+            android:textAllCaps="false"
+            android:textStyle="normal|italic"
+            android:layout_marginLeft="5dp" />
+
         <LinearLayout
             android:orientation="horizontal"
             android:layout_width="match_parent"
@@ -124,7 +146,14 @@
                 android:backgroundTint="@color/colorPrimary"
                 android:layout_height="@dimen/bt_square_mid"
                 android:layout_width="@dimen/bt_square_mid"
-                android:textSize="12sp" />
+                android:textSize="12sp"
+                android:visibility="visible" />
+
+            <TableRow
+                android:layout_width="1dp"
+                android:background="@color/colorPrimaryDark"
+                android:layout_height="match_parent"
+                android:id="@+id/tr_trending_ads" />
 
             <Button
                 android:text="@string/bt_trending_ads_label"
@@ -135,7 +164,8 @@
                 android:textColor="@android:color/white"
                 android:drawableTop="@drawable/trending"
                 android:drawablePadding="5dp"
-                android:textSize="12sp" />
+                android:textSize="12sp"
+                android:visibility="visible" />
 
         </LinearLayout>
 
@@ -165,7 +195,7 @@
             <ImageView
                 android:layout_width="@dimen/iv_classification"
                 android:layout_height="@dimen/iv_classification"
-                app:srcCompat="@drawable/ic_mood_happy"
+                app:srcCompat="@drawable/ic_mood_neutral"
                 android:id="@+id/iv_my_points"
                 android:elevation="1dp"
                 android:visibility="visible"

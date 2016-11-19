@@ -1,18 +1,17 @@
 package ihces.barganha;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
+import android.support.v7.app.ActionBar;
+import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListAdapter;
 import android.widget.ListView;
-import android.widget.Toast;
 
 import com.google.gson.Gson;
-
-import java.math.BigDecimal;
 
 import ihces.barganha.models.Ad;
 import ihces.barganha.models.User;
@@ -21,13 +20,21 @@ import ihces.barganha.rest.AdService;
 import ihces.barganha.rest.ServiceResponseListener;
 
 
-public class MyAdsList extends Activity {
+public class MyAdsList extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
         setContentView(R.layout.activity_my_ads_list);
+
+        Toolbar myToolbar = (Toolbar) findViewById(R.id.my_toolbar);
+        setSupportActionBar(myToolbar);
+
+        ActionBar ab = getSupportActionBar();
+        if (ab != null) {
+            ab.setDisplayHomeAsUpEnabled(true);
+        }
 
         AdService service = new AdService();
         service.start(MyAdsList.this);

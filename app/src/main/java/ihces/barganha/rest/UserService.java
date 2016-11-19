@@ -23,10 +23,9 @@ public class UserService extends ApiServiceBase {
             return;
         }
 
-        JSONObject json = new JSONObject();
+        JSONObject json = null;
         try {
-            json.put("token", user.getAuthToken());
-            json.put("celular", user.getCellPhone());
+            json = new JSONObject(gson.toJson(user));
         } catch (JSONException e) {
             e.printStackTrace();
         }
