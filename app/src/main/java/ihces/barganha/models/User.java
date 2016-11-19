@@ -89,7 +89,7 @@ public class User {
         String json = new Gson().toJson(user);
         SharedPreferences prefs = context.getSharedPreferences(USER_FILE_KEY,
                 Context.MODE_PRIVATE);
-        prefs.edit().putString(USER_PREF_KEY, json).apply();
+        prefs.edit().putString(USER_PREF_KEY, json).commit();
     }
 
     public static User getStoredLocal(Context context) {

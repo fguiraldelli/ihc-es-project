@@ -15,6 +15,9 @@ import android.text.Editable;
 import android.text.TextWatcher;
 import android.text.method.DigitsKeyListener;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageButton;
@@ -82,13 +85,16 @@ public class AdvertiseActivity extends AppCompatActivity {
 
         findViewById(R.id.btn_save).setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
+            public void onClick(final View v) {
                 if (etTitle.getText().length() == 0 ||
                         etDescription.getText().length() == 0 ||
                         etPrice.getText().length() == 0 ||
                         currentPhotoUri == null) {
                     return;
                 }
+
+                v.setEnabled(false);
+                findViewById(R.id.loadingPanel).setVisibility(View.VISIBLE);
 
                 try {
                     Ad newAd = new Ad(0,
@@ -114,6 +120,8 @@ public class AdvertiseActivity extends AppCompatActivity {
 
                         @Override
                         public void onError(Exception error) {
+                            findViewById(R.id.loadingPanel).setVisibility(View.GONE);
+                            v.setEnabled(true);
                             setResult(RESULT_CANCELED);
                             Toast.makeText(AdvertiseActivity.this, getText(R.string.toast_post_ad_error), Toast.LENGTH_LONG).show();
                             Log.e("Advertise", "Couldn't POST ad to our API.", error);
@@ -135,8 +143,8 @@ public class AdvertiseActivity extends AppCompatActivity {
 
     private void setupPriceInput() {
         etPrice.setKeyListener(DigitsKeyListener.getInstance("0123456789" + separator));
-        etPrice.addTextChangedListener(new NumberTextWatcher(etPrice));
-        /*etPrice.addTextChangedListener(new TextWatcher() {
+        // etPrice.addTextChangedListener(new NumberTextWatcher(etPrice));
+        etPrice.addTextChangedListener(new TextWatcher() {
             String beforeText = "";
             String finalText = "";
             boolean changing = false;
@@ -192,7 +200,7 @@ public class AdvertiseActivity extends AppCompatActivity {
                     s.replace(0, s.length(), finalText);
                 }
             }
-        });*/
+        });
     }
 
     @Override
@@ -212,5 +220,25 @@ public class AdvertiseActivity extends AppCompatActivity {
                 e.printStackTrace();
             }
         }
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.action_settings:
+                startActivity(new Intent(AdvertiseActivity.this, SettingsActivity.class));
+                return true;
+
+            default:
+                return super.onOptionsItemSelected(item);
+
+        }
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.home_menu, menu);
+        return true;
     }
 }
