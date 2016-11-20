@@ -104,8 +104,6 @@ public class HomeActivity extends AppCompatActivity {
                     @Override
                     public void onResponse(User[] response) {
                         if (response.length == 0) {
-                            User.clearLocal(HomeActivity.this);
-
                             LoginManager.getInstance().logOut();
                             AccessToken.setCurrentAccessToken(null);
                             User.clearLocal(HomeActivity.this);
@@ -124,7 +122,7 @@ public class HomeActivity extends AppCompatActivity {
 
                             User.storeLocal(HomeActivity.this, user);
 
-                            setGreeting(user.isHasAds());
+                            setGreeting(!user.isHasAds());
 
                             TextView tvLabelSelling = (TextView) findViewById(R.id.tv_label_selling);
                             Button btnMyAdsLocal = (Button) findViewById(R.id.btn_my_ads);

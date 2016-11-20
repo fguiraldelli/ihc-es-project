@@ -111,7 +111,8 @@ public class MainActivity extends AppCompatActivity {
     private void onLoginError() {
         LoginManager.getInstance().logOut();
         AccessToken.setCurrentAccessToken(null);
-        Toast.makeText(MainActivity.this, getText(R.string.toast_login_error), Toast.LENGTH_LONG).show();
+        User.clearLocal(this);
+        Toast.makeText(this, getText(R.string.toast_login_error), Toast.LENGTH_LONG).show();
     }
 
     private void fetchUserData(LoginResult loginResult) {

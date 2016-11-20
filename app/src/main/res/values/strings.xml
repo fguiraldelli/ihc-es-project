@@ -41,7 +41,7 @@
     <string name="tv_negocio_fechado">Negócio Fechado!</string>
     <string name="tv_college_label">Universidade:</string>
     <string name="greeting_welcome">Bem vind%1$s, &lt;b>&lt;big>%2$s&lt;/big>&lt;/b>!</string>
-    <string name="greeting_hello">Olá, &lt;b>%1$s&lt;/b>!</string>
+    <string name="greeting_hello">Olá, &lt;b>&lt;big>%1$s&lt;/big>&lt;/b>!</string>
     <string name="bt_trending_ads_label">Anúncios em alta</string>
     <string name="tv_trending_label">Anúncios em alta:</string>
     <string name="bt_more">Ver mais</string>
