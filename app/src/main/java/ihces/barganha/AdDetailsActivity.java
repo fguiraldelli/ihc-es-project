@@ -91,26 +91,13 @@ public class AdDetailsActivity extends AppCompatActivity implements View.OnClick
     }
 
     private void loadDetails(final Ad ad) {
-        // TODO include user points info straight at the ad
-        userService.getUser(ad.getAuthToken(), new ServiceResponseListener<User[]>() {
-            @Override
-            public void onResponse(User[] response) {
-                User adUser = response.length > 0 ? response[0] : new User();
+        tvTitle.setText(ad.getTitle());
+        tvDescription.setText(ad.getDescription());
+        tvPrice.setText(ad.getPrice());
+        ivPhoto.setImageBitmap(Imaging.readImageFile(AdDetailsActivity.this, ad.getFilename()));
+        ivPoints.setImageDrawable(getResources().getDrawable(ad.getPointsDrawableId()));
 
-                tvTitle.setText(ad.getTitle());
-                tvDescription.setText(ad.getDescription());
-                tvPrice.setText(ad.getPrice());
-                ivPhoto.setImageBitmap(Imaging.readImageFile(AdDetailsActivity.this, ad.getFilename()));
-                ivPoints.setImageDrawable(getResources().getDrawable(adUser.getPointsDrawableId()));
-
-                setControlVisibility();
-            }
-
-            @Override
-            public void onError(Exception error) {
-                Log.e("AdDetails", "Error getting seller points", error);
-            }
-        });
+        setControlVisibility();
     }
 
     private void setControlVisibility() {

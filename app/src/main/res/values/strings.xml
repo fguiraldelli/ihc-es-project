@@ -10,6 +10,7 @@
     <string name="tv_search_terms_hint">O que está procurando?</string>
     <string name="tv_my_points_label">Minha classificação:</string>
     <string name="tv_search_terms_label">Exibindo resultados da pesquisa por:</string>
+    <string name="tv_no_results_label">Nenhum resultado encontrado para:</string>
     <string name="toast_login_required">É necessário fazer login pela conta do Facebook para usar a aplicação</string>
     <string name="toast_login_error">Houve um problema ao tentar entrar com o Facebook. Tente mais tarde ou entre em contato conosco pela Play Store.</string>
 

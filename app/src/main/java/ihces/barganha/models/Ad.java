@@ -5,8 +5,6 @@ import android.content.SharedPreferences;
 
 import com.google.gson.annotations.SerializedName;
 
-import ihces.barganha.AdDetailsActivity;
-
 public class Ad {
 
     public static final String SEPARATOR = ",";
@@ -24,28 +22,31 @@ public class Ad {
     private String description;
     @SerializedName("preco")
     private String price;
-    @SerializedName("meuspontos")
+    @SerializedName("pontosanunciante")
     private int points;
     @SerializedName("imagem")
     private String photoBase64;
-    @SerializedName("token")
-    private String authToken;
+    @SerializedName("id_usuario")
+    private int userId;
     @SerializedName("negocio_fechado")
     private boolean isDue;
     @SerializedName("id_facebook")
     private long facebookId;
+    @SerializedName("token")
+    private String authToken;
 
     private String filename = "";
 
     public Ad() { } // Enable Serialization
 
-    public Ad(int id, String authToken, String title, String description, String price, long facebookId) {
-        this(id, authToken, title, description, price, "", facebookId);
+    public Ad(int id, String authToken, int userId, String title, String description, String price, long facebookId) {
+        this(id, authToken, userId, title, description, price, "", facebookId);
     }
 
-    public Ad(int id, String authToken, String title, String description, String price, String photoBase64, long facebookId) {
+    public Ad(int id, String authToken, int userId, String title, String description, String price, String photoBase64, long facebookId) {
         this.id = id;
         this.authToken = authToken;
+        this.userId = userId;
         this.title = title;
         this.description = description;
 
@@ -71,6 +72,14 @@ public class Ad {
 
     public void setId(int id) {
         this.id = id;
+    }
+
+    public String getAuthToken() {
+        return authToken;
+    }
+
+    public void setAuthToken(String authToken) {
+        this.authToken = authToken;
     }
 
     public String getTitle() {
@@ -113,12 +122,12 @@ public class Ad {
         this.photoBase64 = photoBase64;
     }
 
-    public String getAuthToken() {
-        return authToken;
+    public int getUserId() {
+        return userId;
     }
 
-    public void setAuthToken(String authToken) {
-        this.authToken = authToken;
+    public void setUserId(int userId) {
+        this.userId = userId;
     }
 
     public String getFilename() {
@@ -199,5 +208,9 @@ public class Ad {
 
     public void setFacebookId(long facebookId) {
         this.facebookId = facebookId;
+    }
+
+    public int getPointsDrawableId() {
+        return User.getDrawableId(points);
     }
 }

@@ -15,6 +15,8 @@ public class User {
     public static final String GENDER_FEMALE_FACEBOOK = "female";
     public static final String GENDER_MALE_FACEBOOK = "male";
 
+    @SerializedName("id")
+    private int id = 0;
     @SerializedName("token")
     private String authToken = "";
     @SerializedName("id_instituicao")
@@ -32,7 +34,8 @@ public class User {
     @SerializedName("id_facebook")
     private long facebookId;
 
-    public User(String authToken, int collegeId, int points, int ads, String cellPhone, String name, String gender, long facebookId) {
+    public User(int id, String authToken, int collegeId, int points, int ads, String cellPhone, String name, String gender, long facebookId) {
+        this.id = id;
         this.authToken = authToken;
         this.collegeId = collegeId;
         this.points = points;
@@ -46,7 +49,15 @@ public class User {
     public User() {} // Enable serialization
 
     public User(String authToken, int collegeId, String cellPhone, String name, String gender, long facebookId) {
-        this(authToken, collegeId, 3, 0, cellPhone, name, gender, facebookId);
+        this(0, authToken, collegeId, 3, 0, cellPhone, name, gender, facebookId);
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getAuthToken() {
@@ -110,20 +121,26 @@ public class User {
     public int getPointsDrawableId() {
         int id = R.drawable.ic_mood_neutral;
         if (isHasAds()) {
-            switch (points) {
-                case 1:
-                    id = R.drawable.ic_mood_angry; break;
-                case 2:
-                    id = R.drawable.ic_mood_troubled; break;
-                case 3:
-                    id = R.drawable.ic_mood_neutral; break;
-                case 4:
-                    id = R.drawable.ic_mood_content; break;
-                case 5:
-                    id = R.drawable.ic_mood_happy; break;
-                default:
-                    id = R.drawable.ic_mood_neutral; break;
-            }
+            id = getDrawableId(points);
+        }
+        return id;
+    }
+
+    public static int getDrawableId(int points) {
+        int id;
+        switch (points) {
+            case 1:
+                id = R.drawable.ic_mood_angry; break;
+            case 2:
+                id = R.drawable.ic_mood_troubled; break;
+            case 3:
+                id = R.drawable.ic_mood_neutral; break;
+            case 4:
+                id = R.drawable.ic_mood_content; break;
+            case 5:
+                id = R.drawable.ic_mood_happy; break;
+            default:
+                id = R.drawable.ic_mood_neutral; break;
         }
         return id;
     }

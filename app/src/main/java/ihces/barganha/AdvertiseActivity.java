@@ -101,6 +101,7 @@ public class AdvertiseActivity extends AppCompatActivity {
 
                     Ad newAd = new Ad(0,
                             storedUser.getAuthToken(),
+                            storedUser.getId(),
                             etTitle.getText().toString(),
                             etDescription.getText().toString(),
                             etPrice.getText().toString(),

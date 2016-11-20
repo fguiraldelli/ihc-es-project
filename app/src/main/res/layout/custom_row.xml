@@ -21,7 +21,8 @@
         android:layout_height="100dp"
         android:layout_marginTop="10dp"
         android:layout_marginStart="125dp"
-        android:background="#cacaca" />
+        android:background="#cacaca"
+        android:id="@+id/img_separator" />
 
     <TextView
         android:text="TextView"
@@ -39,26 +40,35 @@
         android:text="TextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="23dp"
+        android:layout_marginEnd="10dp"
         android:id="@+id/row_price"
         tools:text="R$####,##"
-        android:layout_alignTop="@+id/row_image"
-        android:layout_alignParentEnd="true" />
+        android:layout_alignTop="@id/row_description"
+        android:layout_alignParentEnd="true"
+        android:paddingTop="10dp" />
 
     <TextView
         android:text="TextView"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/row_title"
         tools:text="Advertise Title"
         android:layout_alignTop="@+id/row_image"
-        android:layout_centerHorizontal="true" />
+        android:layout_centerHorizontal="false"
+        android:ems="6"
+        android:layout_toEndOf="@id/img_separator"
+        android:layout_marginStart="5dp"
+        android:layout_marginEnd="10dp"
+        android:ellipsize="marquee"
+        android:minLines="1"
+        android:singleLine="true" />
 
     <View
         android:layout_width="fill_parent"
         android:layout_height="1dp"
         android:layout_marginTop="120dp"
-        android:background="#cacaca" />
+        android:background="#cacaca"
+        android:id="@+id/item_separator" />
 
     <ImageView
         android:layout_width="@dimen/iv_classification"
@@ -69,6 +79,5 @@
         android:visibility="invisible"
         android:layout_below="@+id/row_price"
         android:layout_alignEnd="@+id/row_price"
-        android:layout_marginEnd="18dp"
-        android:layout_marginTop="24dp" />
+        android:layout_marginTop="15dp" />
 </RelativeLayout>

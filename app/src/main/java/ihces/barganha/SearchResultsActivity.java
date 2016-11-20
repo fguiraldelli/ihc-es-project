@@ -79,6 +79,11 @@ public class SearchResultsActivity extends AppCompatActivity {
                                 }
                             }
                     );
+
+                    if (response.length == 0) {
+                        ((TextView) findViewById(R.id.tv_search_terms_label)).setText(R.string.tv_no_results_label);
+                    }
+
                     findViewById(R.id.loadingPanel).setVisibility(View.GONE);
                 }
 

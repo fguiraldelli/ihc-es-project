@@ -93,7 +93,8 @@
                 android:id="@+id/tv_search_terms"
                 android:layout_weight="1"
                 android:hint="@string/tv_search_terms_hint"
-                android:layout_marginLeft="5dp" />
+                android:layout_marginLeft="5dp"
+                android:maxLines="1" />
 
             <Button
                 android:layout_width="50dp"

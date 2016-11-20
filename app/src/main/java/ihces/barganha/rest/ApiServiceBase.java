@@ -24,7 +24,7 @@ import java.util.Map;
 public abstract class ApiServiceBase {
 
     public static final String BASE_URL = "http://54.145.242.159:1234/";
-    private static final String GET_EXTENSION = ".json";
+    protected static final String GET_EXTENSION = ".json";
     protected boolean isMock = false;
     protected RequestQueue queue = null;
 
@@ -47,6 +47,28 @@ public abstract class ApiServiceBase {
                     @Override
                     public void onResponse(JSONObject response) {
                         listener.onResponse(response.toString());
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        listener.onError(error);
+                    }
+                }
+        );
+    }
+
+    @NonNull
+    protected <T> JsonObjectRequest makeGetRequest(final Class<T> outClass,
+                                                  final ServiceResponseListener<T> listener,
+                                                  String urlParam) {
+        return new JsonObjectRequest(makeUrl(urlParam),
+                null,
+                new Response.Listener<JSONObject>() {
+                    @Override
+                    public void onResponse(JSONObject response) {
+                        T obj = new Gson().fromJson(response.toString(), outClass);
+                        listener.onResponse(obj);
                     }
                 },
                 new Response.ErrorListener() {
