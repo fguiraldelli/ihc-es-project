@@ -32,16 +32,18 @@ public class Ad {
     private String authToken;
     @SerializedName("negocio_fechado")
     private boolean isDue;
+    @SerializedName("id_facebook")
+    private long facebookId;
 
     private String filename = "";
 
     public Ad() { } // Enable Serialization
 
-    public Ad(int id, String authToken, String title, String description, String price) {
-        this(id, authToken, title, description, price, "");
+    public Ad(int id, String authToken, String title, String description, String price, long facebookId) {
+        this(id, authToken, title, description, price, "", facebookId);
     }
 
-    public Ad(int id, String authToken, String title, String description, String price, String photoBase64) {
+    public Ad(int id, String authToken, String title, String description, String price, String photoBase64, long facebookId) {
         this.id = id;
         this.authToken = authToken;
         this.title = title;
@@ -60,6 +62,7 @@ public class Ad {
         this.photoBase64 = photoBase64;
         this.filename = "";
         this.isDue = false;
+        this.facebookId = facebookId;
     }
 
     public int getId() {
@@ -188,5 +191,13 @@ public class Ad {
 
     public void setPoints(int points) {
         this.points = points;
+    }
+
+    public long getFacebookId() {
+        return facebookId;
+    }
+
+    public void setFacebookId(long facebookId) {
+        this.facebookId = facebookId;
     }
 }

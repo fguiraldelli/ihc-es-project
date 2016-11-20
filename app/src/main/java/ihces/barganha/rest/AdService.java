@@ -70,7 +70,7 @@ public class AdService extends ApiServiceBase {
         JSONObject jo = new JSONObject();
         try {
             jo.put("negocio_fechado", true);
-            jo.put("token", ad.getAuthToken());
+            jo.put("token", token);
         } catch (JSONException e) {
             e.printStackTrace();
         }

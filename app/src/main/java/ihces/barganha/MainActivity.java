@@ -131,7 +131,7 @@ public class MainActivity extends AppCompatActivity {
                             try {
                                 String name = object.getString("first_name");
                                 String gender = object.getString("gender");
-                                int facebookId = object.getInt("id");
+                                long facebookId = object.getLong("id");
 
                                 String cellNumber = etCellNumber.getText().toString();
                                 int collegeId = collegeIds[spCollege.getSelectedItemPosition()];

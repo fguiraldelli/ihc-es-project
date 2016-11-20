@@ -27,6 +27,8 @@ public class SearchResultsActivity extends AppCompatActivity {
 
     public static final String SEARCH_TERMS_EXTRA_KEY = "searchTerms";
 
+    private String searchTerms;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -42,38 +44,46 @@ public class SearchResultsActivity extends AppCompatActivity {
         }
 
         TextView tvSearchTerms = (TextView)findViewById(R.id.tv_search_terms);
-        String searchTerms = getIntent().getStringExtra(SEARCH_TERMS_EXTRA_KEY);
+
+        if (savedInstanceState == null) {
+            searchTerms = getIntent().getStringExtra(SEARCH_TERMS_EXTRA_KEY);
+            if (searchTerms == null) {
+                searchTerms = "";
+            }
+        } else {
+            searchTerms = savedInstanceState.getString(SEARCH_TERMS_EXTRA_KEY, "");
+        }
 
         if (!searchTerms.trim().isEmpty()) {
             tvSearchTerms.setText("\"" + searchTerms + "\"");
-        }
 
-        AdService service = new AdService();
-        service.start(SearchResultsActivity.this);
-        service.searchAds(searchTerms, new ServiceResponseListener<Ad[]>() {
-            @Override
-            public void onResponse(Ad[] response) {
-                final ListAdapter adapter = new CustomAdapter(SearchResultsActivity.this, response);
-                ListView advertiseListView = (ListView) findViewById(R.id.lv_results);
-                advertiseListView.setAdapter(adapter);
+            AdService service = new AdService();
+            service.start(SearchResultsActivity.this);
+            service.searchAds(searchTerms, new ServiceResponseListener<Ad[]>() {
+                @Override
+                public void onResponse(Ad[] response) {
+                    final ListAdapter adapter = new CustomAdapter(SearchResultsActivity.this, response);
+                    ListView advertiseListView = (ListView) findViewById(R.id.lv_results);
+                    advertiseListView.setAdapter(adapter);
 
-                advertiseListView.setOnItemClickListener(
-                        new AdapterView.OnItemClickListener(){
-                            @Override
-                            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                                openDetailsActivity((Ad)adapter.getItem(i));
+                    advertiseListView.setOnItemClickListener(
+                            new AdapterView.OnItemClickListener() {
+                                @Override
+                                public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                                    openDetailsActivity((Ad) adapter.getItem(i));
+                                }
                             }
-                        }
-                );
+                    );
                 /*Stops animated circle*/
-                findViewById(R.id.loadingPanel).setVisibility(View.GONE);
-            }
+                    findViewById(R.id.loadingPanel).setVisibility(View.GONE);
+                }
 
-            @Override
-            public void onError(Exception error) {
+                @Override
+                public void onError(Exception error) {
 
-            }
-        });
+                }
+            });
+        }
     }
 
     private void openDetailsActivity(Ad ad) {
@@ -108,5 +118,11 @@ public class SearchResultsActivity extends AppCompatActivity {
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.home_menu, menu);
         return true;
+    }
+
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putString(SEARCH_TERMS_EXTRA_KEY, searchTerms);
     }
 }

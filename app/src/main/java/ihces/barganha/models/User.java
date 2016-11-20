@@ -30,9 +30,9 @@ public class User {
     @SerializedName("sexo")
     private String gender;
     @SerializedName("id_facebook")
-    private int facebookId;
+    private long facebookId;
 
-    public User(String authToken, int collegeId, int points, int ads, String cellPhone, String name, String gender, int facebookId) {
+    public User(String authToken, int collegeId, int points, int ads, String cellPhone, String name, String gender, long facebookId) {
         this.authToken = authToken;
         this.collegeId = collegeId;
         this.points = points;
@@ -45,7 +45,7 @@ public class User {
 
     public User() {} // Enable serialization
 
-    public User(String authToken, int collegeId, String cellPhone, String name, String gender, int facebookId) {
+    public User(String authToken, int collegeId, String cellPhone, String name, String gender, long facebookId) {
         this(authToken, collegeId, 3, 0, cellPhone, name, gender, facebookId);
     }
 
@@ -90,6 +90,12 @@ public class User {
         SharedPreferences prefs = context.getSharedPreferences(USER_FILE_KEY,
                 Context.MODE_PRIVATE);
         prefs.edit().putString(USER_PREF_KEY, json).commit();
+    }
+
+    public static void clearLocal(Context context) {
+        SharedPreferences prefs = context.getSharedPreferences(USER_FILE_KEY,
+                Context.MODE_PRIVATE);
+        prefs.edit().remove(USER_PREF_KEY).commit();
     }
 
     public static User getStoredLocal(Context context) {
@@ -150,11 +156,11 @@ public class User {
         return this.gender == GENDER_FEMALE_FACEBOOK;
     }
 
-    public int getFacebookId() {
+    public long getFacebookId() {
         return facebookId;
     }
 
-    public void setFacebookId(int facebookId) {
+    public void setFacebookId(long facebookId) {
         this.facebookId = facebookId;
     }
 }

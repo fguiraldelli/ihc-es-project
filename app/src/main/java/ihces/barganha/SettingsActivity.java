@@ -14,6 +14,8 @@ import android.view.View;
 import com.facebook.AccessToken;
 import com.facebook.login.LoginManager;
 
+import ihces.barganha.models.User;
+
 public class SettingsActivity extends AppCompatActivity {
 
     @Override
@@ -35,6 +37,7 @@ public class SettingsActivity extends AppCompatActivity {
             public void onClick(View v) {
                 LoginManager.getInstance().logOut();
                 AccessToken.setCurrentAccessToken(null);
+                User.clearLocal(SettingsActivity.this);
 
                 Log.d("Settings", "Logged Out of Facebook.");
 

@@ -6,7 +6,9 @@ import android.content.res.Resources;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.text.Editable;
 import android.text.Html;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -101,31 +103,46 @@ public class HomeActivity extends AppCompatActivity {
                 new ServiceResponseListener<User[]>() {
                     @Override
                     public void onResponse(User[] response) {
-                        User responseUser = response[0];
+                        if (response.length == 0) {
+                            User.clearLocal(HomeActivity.this);
 
-                        user.setAds(responseUser.getAds());
-                        user.setPoints(responseUser.getPoints());
+                            LoginManager.getInstance().logOut();
+                            AccessToken.setCurrentAccessToken(null);
+                            User.clearLocal(HomeActivity.this);
 
-                        User.storeLocal(HomeActivity.this, user);
+                            Log.d("Home", "Logged Out of Facebook.");
 
-                        setGreeting(user.isHasAds());
-
-                        TextView tvLabelSelling = (TextView)findViewById(R.id.tv_label_selling);
-                        Button btnMyAdsLocal = (Button)findViewById(R.id.btn_my_ads);
-                        TextView tvPointsLabel = (TextView)findViewById(R.id.tv_points_label);
-                        ImageView ivMyPoints = (ImageView)findViewById(R.id.iv_my_points);
-
-                        if (user.isHasAds()) {
-                            btnMyAdsLocal.setVisibility(View.VISIBLE);
-                            tvPointsLabel.setVisibility(View.VISIBLE);
-                            ivMyPoints.setVisibility(View.VISIBLE);
-                            tvLabelSelling.setVisibility(View.GONE);
-                            ivMyPoints.setImageDrawable(getResources().getDrawable(user.getPointsDrawableId()));
+                            Intent intent = new Intent(HomeActivity.this, MainActivity.class);
+                            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                            startActivity(intent);
+                            finish();
                         } else {
-                            btnMyAdsLocal.setVisibility(View.GONE);
-                            tvPointsLabel.setVisibility(View.INVISIBLE);
-                            ivMyPoints.setVisibility(View.INVISIBLE);
-                            tvLabelSelling.setVisibility(View.VISIBLE);
+                            User responseUser = response[0];
+
+                            user.setAds(responseUser.getAds());
+                            user.setPoints(responseUser.getPoints());
+
+                            User.storeLocal(HomeActivity.this, user);
+
+                            setGreeting(user.isHasAds());
+
+                            TextView tvLabelSelling = (TextView) findViewById(R.id.tv_label_selling);
+                            Button btnMyAdsLocal = (Button) findViewById(R.id.btn_my_ads);
+                            TextView tvPointsLabel = (TextView) findViewById(R.id.tv_points_label);
+                            ImageView ivMyPoints = (ImageView) findViewById(R.id.iv_my_points);
+
+                            if (user.isHasAds()) {
+                                btnMyAdsLocal.setVisibility(View.VISIBLE);
+                                tvPointsLabel.setVisibility(View.VISIBLE);
+                                ivMyPoints.setVisibility(View.VISIBLE);
+                                tvLabelSelling.setVisibility(View.GONE);
+                                ivMyPoints.setImageDrawable(getResources().getDrawable(user.getPointsDrawableId()));
+                            } else {
+                                btnMyAdsLocal.setVisibility(View.GONE);
+                                tvPointsLabel.setVisibility(View.INVISIBLE);
+                                ivMyPoints.setVisibility(View.INVISIBLE);
+                                tvLabelSelling.setVisibility(View.VISIBLE);
+                            }
                         }
                     }
 
@@ -141,14 +158,34 @@ public class HomeActivity extends AppCompatActivity {
         tvSearchTerms = (AutoCompleteTextView)findViewById(R.id.tv_search_terms);
 
         btSearch = (Button)findViewById(R.id.btn_search);
+        btSearch.setEnabled(false);
         btSearch.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 String searchTerms = tvSearchTerms.getText().toString().trim();
-                if (!searchTerms.trim().isEmpty()) {
-                    openSearchResultActivity(searchTerms);
+                if (!searchTerms.isEmpty()) {
+                    if (searchTerms.length() >= 3) {
+                        openSearchResultActivity(searchTerms);
+                    }
                 }
             }
+        });
+
+        tvSearchTerms.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                if(s.toString().trim().length() < 3){
+                    btSearch.setEnabled(false);
+                } else {
+                    btSearch.setEnabled(true);
+                }
+            }
+
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) { }
+
+            @Override
+            public void afterTextChanged(Editable s) { }
         });
 
         btAdvertise = (Button)findViewById(R.id.btn_advertise);

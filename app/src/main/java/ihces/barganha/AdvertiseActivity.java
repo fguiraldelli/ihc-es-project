@@ -97,11 +97,14 @@ public class AdvertiseActivity extends AppCompatActivity {
                 findViewById(R.id.loadingPanel).setVisibility(View.VISIBLE);
 
                 try {
+                    User storedUser = User.getStoredLocal(AdvertiseActivity.this);
+
                     Ad newAd = new Ad(0,
-                            User.getStoredLocal(AdvertiseActivity.this).getAuthToken(),
+                            storedUser.getAuthToken(),
                             etTitle.getText().toString(),
                             etDescription.getText().toString(),
-                            etPrice.getText().toString()
+                            etPrice.getText().toString(),
+                            storedUser.getFacebookId()
                     );
 
                     Bitmap bitmap = MediaStore.Images.Media.getBitmap(AdvertiseActivity.this.getContentResolver(), currentPhotoUri);
