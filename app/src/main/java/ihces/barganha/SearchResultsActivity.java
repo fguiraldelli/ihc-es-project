@@ -28,6 +28,7 @@ public class SearchResultsActivity extends AppCompatActivity {
     public static final String SEARCH_TERMS_EXTRA_KEY = "searchTerms";
 
     private String searchTerms;
+    private TextView tvSearchTerms;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,7 +44,7 @@ public class SearchResultsActivity extends AppCompatActivity {
             ab.setDisplayHomeAsUpEnabled(true);
         }
 
-        TextView tvSearchTerms = (TextView)findViewById(R.id.tv_search_terms);
+        tvSearchTerms = (TextView)findViewById(R.id.tv_search_terms);
 
         if (savedInstanceState == null) {
             searchTerms = getIntent().getStringExtra(SEARCH_TERMS_EXTRA_KEY);
@@ -54,6 +55,10 @@ public class SearchResultsActivity extends AppCompatActivity {
             searchTerms = savedInstanceState.getString(SEARCH_TERMS_EXTRA_KEY, "");
         }
 
+        doSearch();
+    }
+
+    private void doSearch() {
         if (!searchTerms.trim().isEmpty()) {
             tvSearchTerms.setText("\"" + searchTerms + "\"");
 
@@ -74,7 +79,6 @@ public class SearchResultsActivity extends AppCompatActivity {
                                 }
                             }
                     );
-                /*Stops animated circle*/
                     findViewById(R.id.loadingPanel).setVisibility(View.GONE);
                 }
 
@@ -124,5 +128,12 @@ public class SearchResultsActivity extends AppCompatActivity {
     protected void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
         outState.putString(SEARCH_TERMS_EXTRA_KEY, searchTerms);
+    }
+
+    @Override
+    public void onRestoreInstanceState(Bundle savedInstanceState) {
+        super.onRestoreInstanceState(savedInstanceState);
+        searchTerms = savedInstanceState.getString(SEARCH_TERMS_EXTRA_KEY, "");
+        doSearch();
     }
 }
