@@ -79,5 +79,14 @@
         android:visibility="invisible"
         android:layout_below="@+id/row_price"
         android:layout_alignEnd="@+id/row_price"
-        android:layout_marginTop="15dp" />
+        android:layout_marginTop="6dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/tv_ad_time"
+        android:layout_alignEnd="@+id/row_price"
+        android:layout_alignParentBottom="false"
+        android:layout_alignBottom="@+id/row_image"
+        android:text="NN d" />
 </RelativeLayout>

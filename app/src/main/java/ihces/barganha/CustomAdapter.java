@@ -22,10 +22,12 @@ public class CustomAdapter extends BaseAdapter{
     private LayoutInflater adsInflater;
     private Context context;
     private User user;
+    private boolean myAds;
 
-    public CustomAdapter(Context context, Ad[] ads) {
+    public CustomAdapter(Context context, Ad[] ads, boolean myAds) {
         this.context = context;
         this.ads = ads;
+        this.myAds = myAds;
         adsInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
     }
 
@@ -61,18 +63,23 @@ public class CustomAdapter extends BaseAdapter{
         TextView descriptionText = (TextView) customView.findViewById(R.id.row_description);
         ImageView itemImage = (ImageView) customView.findViewById(R.id.row_image);
         ImageView ivPoints = (ImageView)customView.findViewById(R.id.iv_my_points);
+        TextView tvTime =(TextView)customView.findViewById(R.id.tv_ad_time);
 
         Ad currentAd = ads[position];
         user = new User();
+        user.setId(currentAd.getUserId());
         user.setPoints(currentAd.getPoints());
 
         titleText.setText(currentAd.getTitle());
         priceText.setText(currentAd.getPrice());
         descriptionText.setText(currentAd.getDescription());
         itemImage.setImageBitmap(Imaging.base64DecodeImage(currentAd.getPhotoBase64()));
-        ivPoints.setVisibility(View.VISIBLE);
-        ivPoints.setImageDrawable(context.getResources().getDrawable(user.getPointsDrawableId()));
-        ivPoints.setVisibility(View.VISIBLE);
+        tvTime.setText(currentAd.getAdTime());
+
+        if (!myAds) {
+            ivPoints.setImageDrawable(context.getResources().getDrawable(user.getPointsDrawableId()));
+            ivPoints.setVisibility(View.VISIBLE);
+        }
 
         return customView;
 

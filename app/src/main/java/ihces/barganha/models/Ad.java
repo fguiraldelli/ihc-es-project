@@ -12,7 +12,6 @@ public class Ad {
     private static final String CONTACTING_AD_FILE_KEY = "contacting_ad.pref";
     private static final String AD_ID_PREF_KEY = "adId-";
     private static final String EVAL_AD_ID_PREF_KEY = "evaluationForAdId-";
-
     private static final String MY_DUE_AD_FILE_KEY = "due_ads.pref";
 
     private int id;
@@ -34,16 +33,27 @@ public class Ad {
     private long facebookId;
     @SerializedName("token")
     private String authToken;
+    @SerializedName("tempoanuncio")
+    private String adTime;
+    @SerializedName("visualizacoes")
+    private int views;
+    @SerializedName("tipoanuncio")
+    private char adType; // among [c, d, e, l] -> Compra/venda, Doação, Evento, comércio Local.
+    @SerializedName("datahoraevento")
+    private String eventDateTime;
+    @SerializedName("diassemana")
+    private String weekDays;
 
     private String filename = "";
 
     public Ad() { } // Enable Serialization
 
     public Ad(int id, String authToken, int userId, String title, String description, String price, long facebookId) {
-        this(id, authToken, userId, title, description, price, "", facebookId);
+        this(id, authToken, userId, title, description, price, facebookId, "", 'c', "", "");
     }
 
-    public Ad(int id, String authToken, int userId, String title, String description, String price, String photoBase64, long facebookId) {
+    public Ad(int id, String authToken, int userId, String title, String description, String price,
+              long facebookId, String adTime, char adType, String eventDateTime, String weekDays) {
         this.id = id;
         this.authToken = authToken;
         this.userId = userId;
@@ -60,10 +70,14 @@ public class Ad {
             this.price = price;
         }
 
-        this.photoBase64 = photoBase64;
+        this.photoBase64 = "";
         this.filename = "";
         this.isDue = false;
         this.facebookId = facebookId;
+        this.adTime = adTime;
+        this.adType = adType;
+        this.eventDateTime = eventDateTime;
+        this.weekDays = weekDays;
     }
 
     public int getId() {
@@ -212,5 +226,45 @@ public class Ad {
 
     public int getPointsDrawableId() {
         return User.getDrawableId(points);
+    }
+
+    public String getAdTime() {
+        return adTime;
+    }
+
+    public void setAdTime(String adTime) {
+        this.adTime = adTime;
+    }
+
+    public char getAdType() {
+        return adType;
+    }
+
+    public void setAdType(char adType) {
+        this.adType = adType;
+    }
+
+    public int getViews() {
+        return views;
+    }
+
+    public void setViews(int views) {
+        this.views = views;
+    }
+
+    public String getEventDateTime() {
+        return eventDateTime;
+    }
+
+    public void setEventDateTime(String eventDateTime) {
+        this.eventDateTime = eventDateTime;
+    }
+
+    public String getWeekDays() {
+        return weekDays;
+    }
+
+    public void setWeekDays(String weekDays) {
+        this.weekDays = weekDays;
     }
 }

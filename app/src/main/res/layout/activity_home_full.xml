@@ -48,7 +48,7 @@
                 android:drawablePadding="8dp"
                 android:drawableTop="@drawable/bookmarks"
                 android:textSize="12sp"
-                android:visibility="invisible" />
+                android:visibility="visible" />
 
             <Button
                 android:id="@+id/btn_my_negotiations"
@@ -60,7 +60,7 @@
                 android:layout_height="@dimen/bt_square_mid"
                 android:layout_width="@dimen/bt_square_mid"
                 android:textSize="12sp"
-                android:visibility="invisible" />
+                android:visibility="visible" />
 
             <Button
                 android:text="@string/bt_recent_label"
@@ -72,7 +72,7 @@
                 android:drawableTop="@drawable/recent"
                 android:drawablePadding="0dp"
                 android:textSize="12sp"
-                android:visibility="invisible" />
+                android:visibility="visible" />
 
         </LinearLayout>
 
@@ -167,7 +167,7 @@
                 android:drawableTop="@drawable/trending"
                 android:drawablePadding="5dp"
                 android:textSize="12sp"
-                android:visibility="gone" />
+                android:visibility="visible" />
 
         </LinearLayout>
 

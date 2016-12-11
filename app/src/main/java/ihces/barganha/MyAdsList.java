@@ -45,7 +45,7 @@ public class MyAdsList extends AppCompatActivity {
                 new ServiceResponseListener<Ad[]>() {
             @Override
             public void onResponse(Ad[] response) {
-                final ListAdapter adapter = new CustomAdapter(MyAdsList.this, response);
+                final ListAdapter adapter = new CustomAdapter(MyAdsList.this, response, true);
                 ListView advertiseListView = (ListView) findViewById(R.id.lv_ads);
                 advertiseListView.setAdapter(adapter);
 

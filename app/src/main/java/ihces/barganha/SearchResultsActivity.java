@@ -67,7 +67,7 @@ public class SearchResultsActivity extends AppCompatActivity {
             service.searchAds(searchTerms, new ServiceResponseListener<Ad[]>() {
                 @Override
                 public void onResponse(Ad[] response) {
-                    final ListAdapter adapter = new CustomAdapter(SearchResultsActivity.this, response);
+                    final ListAdapter adapter = new CustomAdapter(SearchResultsActivity.this, response, false);
                     ListView advertiseListView = (ListView) findViewById(R.id.lv_results);
                     advertiseListView.setAdapter(adapter);
 
