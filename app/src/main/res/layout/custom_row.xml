@@ -88,5 +88,6 @@
         android:layout_alignEnd="@+id/row_price"
         android:layout_alignParentBottom="false"
         android:layout_alignBottom="@+id/row_image"
-        android:text="NN d" />
+        android:text="NN d"
+        android:background="?android:attr/colorBackground" />
 </RelativeLayout>

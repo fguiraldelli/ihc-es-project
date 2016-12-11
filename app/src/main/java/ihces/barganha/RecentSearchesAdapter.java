@@ -54,4 +54,8 @@ public class RecentSearchesAdapter extends BaseAdapter {
 
         return customView;
     }
+
+    public void clearData() {
+        this.searches.clear();
+    }
 }

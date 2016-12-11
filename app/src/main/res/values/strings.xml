@@ -51,4 +51,6 @@
     <string name="bt_negotiating_label">Em Negociação</string>
     <string name="bt_saved_label">Anúncios salvos</string>
     <string name="tv_recent_searches_label">Pesquisas recentes neste dispositivo:</string>
+    <string name="tv_recent_searches_label_none">Nenhuma pesquisas recente.</string>
+    <string name="menu_item_clear_recent">Limpar recentes</string>
 </resources>

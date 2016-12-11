@@ -49,6 +49,13 @@
                 android:layout_height="wrap_content"
                 android:id="@+id/tv_recent_searches" />
 
+            <View
+                android:layout_width="fill_parent"
+                android:layout_height="1dp"
+                android:background="#cacaca"
+                android:id="@+id/item_separator"
+                android:layout_margin="5dp" />
+
             <ListView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
