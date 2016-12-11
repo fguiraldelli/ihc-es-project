@@ -37,6 +37,7 @@ public class HomeActivity extends AppCompatActivity {
     Button btAdvertise;
     Button btMyAds;
     Button btRecentSearches;
+    Button btNegotiating;
     Button btTrendingAds;
     TextView tvGreeting;
     UserService service;
@@ -219,6 +220,14 @@ public class HomeActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(HomeActivity.this, RecentSearchesActivity.class));
+            }
+        });
+
+        btNegotiating = (Button)findViewById(R.id.btn_my_negotiations);
+        btNegotiating.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(HomeActivity.this, NegotiationActivity.class));
             }
         });
 

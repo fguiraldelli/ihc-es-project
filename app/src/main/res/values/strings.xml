@@ -40,6 +40,7 @@
     <string name="lobout_explanation">Desassocia o aplicativo da sua conta do Facebook neste celular.</string>
     <string name="title_activity_my_ad_details">Detalhes do meu anúncio</string>
     <string name="title_activity_recent_searches">Pesquisas recentes</string>
+    <string name="title_activity_negotiation">Negociação</string>
     <string name="bt_mark_due_label">Fechar Negócio</string>
     <string name="tv_negocio_fechado">Negócio Fechado!</string>
     <string name="tv_college_label">Universidade:</string>
@@ -54,4 +55,8 @@
     <string name="tv_recent_searches_label">Pesquisas recentes neste dispositivo:</string>
     <string name="tv_recent_searches_label_none">Nenhuma pesquisas recente.</string>
     <string name="menu_item_clear_recent">Limpar recentes</string>
+    <string name="tv_message_label">Enviar uma mensagem:</string>
+    <string name="tv_message_hint">Escreva aqui sua mensagem...</string>
+    <string name="bt_send_label">Enviar</string>
+    <string name="tv_messges_header_label">Negociação do anúncio:</string>
 </resources>

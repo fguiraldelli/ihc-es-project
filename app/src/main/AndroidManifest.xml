@@ -88,6 +88,15 @@
             android:parentActivityName=".MyAdsList" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
+                android:value=".HomeActivity" />
+        </activity>
+        <activity
+            android:name=".NegotiationActivity"
+            android:label="@string/title_activity_negotiation"
+            android:screenOrientation="portrait"
+            android:parentActivityName=".MyAdsList" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
                 android:value=".MyAdsList" />
         </activity>
         <activity

@@ -39,7 +39,7 @@ public class RecentSearchesAdapter extends BaseAdapter {
     public View getView(int position, View convertView, ViewGroup parent) {
         View customView;
 
-        if( convertView == null) {
+        if (convertView == null) {
             customView = inflater.inflate(R.layout.recent_search_row, parent, false);
         } else {
             customView = convertView;
