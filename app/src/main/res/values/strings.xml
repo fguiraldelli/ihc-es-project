@@ -38,6 +38,7 @@
     <string name="bt_logout_label">Sair</string>
     <string name="lobout_explanation">Desassocia o aplicativo da sua conta do Facebook neste celular.</string>
     <string name="title_activity_my_ad_details">Detalhes do meu anúncio</string>
+    <string name="title_activity_recent_searches">Pesquisas recentes</string>
     <string name="bt_mark_due_label">Fechar Negócio</string>
     <string name="tv_negocio_fechado">Negócio Fechado!</string>
     <string name="tv_college_label">Universidade:</string>
@@ -49,4 +50,5 @@
     <string name="bt_recent_label">Buscas recentes</string>
     <string name="bt_negotiating_label">Em Negociação</string>
     <string name="bt_saved_label">Anúncios salvos</string>
+    <string name="tv_recent_searches_label">Pesquisas recentes neste dispositivo:</string>
 </resources>

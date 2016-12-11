@@ -24,6 +24,7 @@ import android.widget.TextView;
 import com.facebook.AccessToken;
 import com.facebook.login.LoginManager;
 
+import ihces.barganha.models.RecentSearch;
 import ihces.barganha.models.User;
 import ihces.barganha.rest.ServiceResponseListener;
 import ihces.barganha.rest.UserService;
@@ -35,6 +36,7 @@ public class HomeActivity extends AppCompatActivity {
     Button btSearch;
     Button btAdvertise;
     Button btMyAds;
+    Button btRecentSearches;
     TextView tvGreeting;
     UserService service;
     User user;
@@ -163,6 +165,7 @@ public class HomeActivity extends AppCompatActivity {
                 String searchTerms = tvSearchTerms.getText().toString().trim();
                 if (!searchTerms.isEmpty()) {
                     if (searchTerms.length() >= 3) {
+                        RecentSearch.storeLocal(HomeActivity.this, new RecentSearch(searchTerms));
                         openSearchResultActivity(searchTerms);
                     }
                 }
@@ -200,6 +203,14 @@ public class HomeActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(HomeActivity.this, MyAdsList.class));
+            }
+        });
+
+        btRecentSearches = (Button)findViewById(R.id.bt_recent);
+        btRecentSearches.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(HomeActivity.this, RecentSearchesActivity.class));
             }
         });
     }

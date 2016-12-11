@@ -16,7 +16,7 @@ import ihces.barganha.models.Ad;
 import ihces.barganha.models.User;
 import ihces.barganha.photo.Imaging;
 
-public class CustomAdapter extends BaseAdapter{
+public class CustomAdapter extends BaseAdapter {
 
     private final Ad[] ads;
     private LayoutInflater adsInflater;
@@ -50,7 +50,6 @@ public class CustomAdapter extends BaseAdapter{
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         View customView;
-
 
         if( convertView == null) {
             customView = adsInflater.inflate(R.layout.custom_row, parent, false);
