@@ -94,7 +94,9 @@
                 android:layout_weight="1"
                 android:hint="@string/tv_search_terms_hint"
                 android:layout_marginLeft="5dp"
-                android:maxLines="1" />
+                android:inputType="text"
+                android:imeOptions="actionDone"
+                android:maxLines="1"/>
 
             <Button
                 android:layout_width="50dp"
