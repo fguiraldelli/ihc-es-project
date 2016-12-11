@@ -13,6 +13,7 @@ import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -27,11 +28,13 @@ public abstract class ApiServiceBase {
     protected static final String GET_EXTENSION = ".json";
     protected boolean isMock = false;
     protected RequestQueue queue = null;
+    private Gson gson;
 
     public void start(Context context) {
         if (this.queue == null) {
             this.queue = Volley.newRequestQueue(context);
         }
+        gson = new GsonBuilder().setDateFormat("yyyy-MM-dd'T'HH:mm:ssZ").create();
     }
 
     public void setAsMock() {
@@ -88,7 +91,7 @@ public abstract class ApiServiceBase {
                 new Response.Listener<JSONArray>() {
                     @Override
                     public void onResponse(JSONArray response) {
-                        T obj = new Gson().fromJson(response.toString(), outClass);
+                        T obj = gson.fromJson(response.toString(), outClass);
                         listener.onResponse(obj);
                     }
                 },

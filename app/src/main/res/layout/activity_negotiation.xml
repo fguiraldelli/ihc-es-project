@@ -58,12 +58,20 @@
             android:textAlignment="center"
             android:ellipsize="marquee" />
 
+        <View
+            android:layout_width="fill_parent"
+            android:layout_height="1dp"
+            android:background="#cacaca"
+            android:id="@+id/item_separator"
+            android:layout_below="@+id/tv_messages_ad_title"
+            android:layout_margin="10dp" />
+
         <ListView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/lv_messages"
             android:layout_above="@+id/et_message"
-            android:layout_below="@+id/tv_messages_ad_title" />
+            android:layout_below="@+id/item_separator" />
 
         <EditText
             android:layout_width="match_parent"
