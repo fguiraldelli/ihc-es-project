@@ -19,8 +19,10 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.Spinner;
 import android.widget.Toast;
 
 import java.io.FileDescriptor;
@@ -45,9 +47,16 @@ public class AdvertiseActivity extends AppCompatActivity {
     private EditText etTitle;
     private EditText etDescription;
     private EditText etPrice;
+    private Spinner spEvent;
+    private Spinner spWeekDay;
+    private String[] weekdaysIds;
+
+    private CharSequence[] eventIds;
 
     // Keep it around till it's time to upload the image.
     private Uri currentPhotoUri = null;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,6 +71,20 @@ public class AdvertiseActivity extends AppCompatActivity {
         if (ab != null) {
             ab.setDisplayHomeAsUpEnabled(true);
         }
+
+        ArrayAdapter spEventAdapter = ArrayAdapter.createFromResource(this,
+                R.array.event_names, R.layout.spinner_item);
+        spEventAdapter.setDropDownViewResource(R.layout.spinner_dropdown_item);
+        spEvent = (Spinner) findViewById(R.id.sp_event);
+        spEvent.setAdapter(spEventAdapter);
+        eventIds = getResources().getTextArray(R.array.event_ids);
+
+        ArrayAdapter spWeekDayAdapter = ArrayAdapter.createFromResource(this,
+                R.array.weekday_names, R.layout.spinner_item);
+        spWeekDayAdapter.setDropDownViewResource(R.layout.spinner_dropdown_item);
+        spWeekDay = (Spinner) findViewById(R.id.sp_weekday);
+        spWeekDay.setAdapter(spWeekDayAdapter);
+        weekdaysIds = getResources().getStringArray(R.array.weekday_ids);
 
         findViews();
         setupPriceInput();
@@ -105,7 +128,9 @@ public class AdvertiseActivity extends AppCompatActivity {
                             etTitle.getText().toString(),
                             etDescription.getText().toString(),
                             etPrice.getText().toString(),
-                            storedUser.getFacebookId()
+                            storedUser.getFacebookId(),
+                            eventIds[spEvent.getSelectedItemPosition()].toString().charAt(0),
+                            weekdaysIds[spEvent.getSelectedItemPosition()]
                     );
 
                     Bitmap bitmap = MediaStore.Images.Media.getBitmap(AdvertiseActivity.this.getContentResolver(), currentPhotoUri);
@@ -142,6 +167,7 @@ public class AdvertiseActivity extends AppCompatActivity {
         etTitle = (EditText) findViewById(R.id.et_title);
         etDescription = (EditText) findViewById(R.id.et_description);
         etPrice = (EditText)findViewById(R.id.et_price);
+        spEvent = (Spinner)findViewById(R.id.sp_event);
         ibPhoto = (ImageButton)findViewById(R.id.bt_choose_photo);
     }
 

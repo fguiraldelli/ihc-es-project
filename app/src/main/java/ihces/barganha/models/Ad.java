@@ -48,8 +48,8 @@ public class Ad {
 
     public Ad() { } // Enable Serialization
 
-    public Ad(int id, String authToken, int userId, String title, String description, String price, long facebookId) {
-        this(id, authToken, userId, title, description, price, facebookId, "", 'c', "", "");
+    public Ad(int id, String authToken, int userId, String title, String description, String price, long facebookId, char adType, String weekDays) {
+        this(id, authToken, userId, title, description, price, facebookId, "", adType, "", weekDays);
     }
 
     public Ad(int id, String authToken, int userId, String title, String description, String price,

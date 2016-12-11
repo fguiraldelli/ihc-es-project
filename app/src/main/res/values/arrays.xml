@@ -10,4 +10,34 @@
         <item>2</item> <!-- Anhanguera -->
         <item>3</item> <!-- FATEC -->
     </integer-array>
+    <string-array name="event_names">
+        <item>vender</item>
+        <item>doar</item>
+        <item>comercio local</item>
+        <item>evento</item>
+    </string-array>
+    <string-array name="event_ids"> <!-- Always follow position from string-array "college_names" -->
+        <item>c</item> <!-- vender -->
+        <item>d</item> <!-- doar -->
+        <item>l</item> <!-- comercio local -->
+        <item>e</item> <!-- evento -->
+    </string-array>
+    <string-array name="weekday_names">
+        <item>domingo</item>
+        <item>segunda</item>
+        <item>terça</item>
+        <item>quarta</item>
+        <item>quinta</item>
+        <item>sexta</item>
+        <item>sábado</item>
+    </string-array>
+    <string-array name="weekday_ids"> <!-- Always follow position from string-array "college_names" -->
+        <item>1000000</item> <!--domingo -->
+        <item>0100000</item> <!--segunda -->
+        <item>0010000</item> <!--terça -->
+        <item>0001000</item> <!--quarta -->
+        <item>0000100</item> <!--quinta -->
+        <item>0000010</item> <!--sexta -->
+        <item>0000001</item> <!--sábado -->
+    </string-array>
 </resources>

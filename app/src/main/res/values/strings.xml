@@ -19,6 +19,7 @@
     <string name="btn_cancel">cancelar</string>
     <string name="input_description">Descriçao</string>
     <string name="input_price">Preço</string>
+    <string name="sp_event">Tipo Anuncio</string>
     <string name="input_title">Título</string>
     <string name="tv_search_terms_default">(nenhum termo definido)</string>
     <string name="tv_selling_label">Ou talvez você queira vender algo &#8230;</string>
