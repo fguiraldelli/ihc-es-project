@@ -19,6 +19,7 @@ import android.widget.Toast;
 import com.google.gson.Gson;
 
 import ihces.barganha.models.Ad;
+import ihces.barganha.models.User;
 import ihces.barganha.photo.Imaging;
 import ihces.barganha.rest.AdService;
 import ihces.barganha.rest.ServiceResponseListener;
@@ -26,7 +27,9 @@ import ihces.barganha.rest.ServiceResponseListener;
 public class SearchResultsActivity extends AppCompatActivity {
 
     public static final String SEARCH_TERMS_EXTRA_KEY = "searchTerms";
+    public static final String TRENDING_EXTRA_KEY = "trending";
 
+    private boolean trending;
     private String searchTerms;
     private TextView tvSearchTerms;
 
@@ -51,19 +54,22 @@ public class SearchResultsActivity extends AppCompatActivity {
             if (searchTerms == null) {
                 searchTerms = "";
             }
+            trending = getIntent().getBooleanExtra(TRENDING_EXTRA_KEY, false);
         } else {
             searchTerms = savedInstanceState.getString(SEARCH_TERMS_EXTRA_KEY, "");
+            trending = savedInstanceState.getBoolean(TRENDING_EXTRA_KEY, false);
         }
 
         doSearch();
     }
 
     private void doSearch() {
+        AdService service = new AdService();
+        service.start(SearchResultsActivity.this);
+
         if (!searchTerms.trim().isEmpty()) {
             tvSearchTerms.setText("\"" + searchTerms + "\"");
 
-            AdService service = new AdService();
-            service.start(SearchResultsActivity.this);
             service.searchAds(searchTerms, new ServiceResponseListener<Ad[]>() {
                 @Override
                 public void onResponse(Ad[] response) {
@@ -83,6 +89,35 @@ public class SearchResultsActivity extends AppCompatActivity {
                     if (response.length == 0) {
                         ((TextView) findViewById(R.id.tv_search_terms_label)).setText(R.string.tv_no_results_label);
                     }
+
+                    findViewById(R.id.loadingPanel).setVisibility(View.GONE);
+                }
+
+                @Override
+                public void onError(Exception error) {
+
+                }
+            });
+        } else if (trending) {
+            int userId = User.getStoredLocal(SearchResultsActivity.this).getId();
+            service.getTrendingAds(userId, new ServiceResponseListener<Ad[]>() {
+                @Override
+                public void onResponse(Ad[] response) {
+                    final ListAdapter adapter = new CustomAdapter(SearchResultsActivity.this, response, false);
+                    ListView advertiseListView = (ListView) findViewById(R.id.lv_results);
+                    advertiseListView.setAdapter(adapter);
+
+                    advertiseListView.setOnItemClickListener(
+                            new AdapterView.OnItemClickListener() {
+                                @Override
+                                public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                                    openDetailsActivity((Ad) adapter.getItem(i));
+                                }
+                            }
+                    );
+
+                    ((TextView) findViewById(R.id.tv_search_terms_label)).setText(R.string.tv_trending_ads_label);
+                    tvSearchTerms.setVisibility(View.GONE);
 
                     findViewById(R.id.loadingPanel).setVisibility(View.GONE);
                 }
@@ -133,12 +168,14 @@ public class SearchResultsActivity extends AppCompatActivity {
     protected void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
         outState.putString(SEARCH_TERMS_EXTRA_KEY, searchTerms);
+        outState.putBoolean(TRENDING_EXTRA_KEY, trending);
     }
 
     @Override
     public void onRestoreInstanceState(Bundle savedInstanceState) {
         super.onRestoreInstanceState(savedInstanceState);
         searchTerms = savedInstanceState.getString(SEARCH_TERMS_EXTRA_KEY, "");
+        trending = savedInstanceState.getBoolean(TRENDING_EXTRA_KEY, false);
         doSearch();
     }
 }

@@ -37,6 +37,7 @@ public class HomeActivity extends AppCompatActivity {
     Button btAdvertise;
     Button btMyAds;
     Button btRecentSearches;
+    Button btTrendingAds;
     TextView tvGreeting;
     UserService service;
     User user;
@@ -130,6 +131,7 @@ public class HomeActivity extends AppCompatActivity {
                             Button btnMyAdsLocal = (Button) findViewById(R.id.btn_my_ads);
                             TextView tvPointsLabel = (TextView) findViewById(R.id.tv_points_label);
                             ImageView ivMyPoints = (ImageView) findViewById(R.id.iv_my_points);
+                            Button btnRecentSearch = (Button) findViewById(R.id.bt_recent);
 
                             if (user.isHasAds()) {
                                 btnMyAdsLocal.setVisibility(View.VISIBLE);
@@ -142,6 +144,12 @@ public class HomeActivity extends AppCompatActivity {
                                 tvPointsLabel.setVisibility(View.INVISIBLE);
                                 ivMyPoints.setVisibility(View.INVISIBLE);
                                 tvLabelSelling.setVisibility(View.VISIBLE);
+                            }
+
+                            if (RecentSearch.hasRecentSearches(HomeActivity.this)) {
+                                btnRecentSearch.setVisibility(View.VISIBLE);
+                            } else {
+                                btnRecentSearch.setVisibility(View.GONE);
                             }
                         }
                     }
@@ -213,6 +221,14 @@ public class HomeActivity extends AppCompatActivity {
                 startActivity(new Intent(HomeActivity.this, RecentSearchesActivity.class));
             }
         });
+
+        btTrendingAds = (Button)findViewById(R.id.bt_trending_ads);
+        btTrendingAds.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                openTrendingAdsActivity();
+            }
+        });
     }
 
     @Override
@@ -225,6 +241,12 @@ public class HomeActivity extends AppCompatActivity {
     private void openSearchResultActivity(String searchTerms) {
         Intent intent = new Intent(HomeActivity.this, SearchResultsActivity.class);
         intent.putExtra(SearchResultsActivity.SEARCH_TERMS_EXTRA_KEY, searchTerms);
+        startActivity(intent);
+    }
+
+    private void openTrendingAdsActivity() {
+        Intent intent = new Intent(HomeActivity.this, SearchResultsActivity.class);
+        intent.putExtra(SearchResultsActivity.TRENDING_EXTRA_KEY, true);
         startActivity(intent);
     }
 

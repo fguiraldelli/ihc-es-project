@@ -14,14 +14,15 @@ import java.util.List;
 
 public class RecentSearch {
 
-    public static final int MINUTE_SECONDS = 60;
-    public static final int HOUR_SECONDS = 60 * MINUTE_SECONDS;
-    public static final int DAY_SECONDS = (HOUR_SECONDS * 24);
-    public static final int MONTH_SECONDS = (DAY_SECONDS * 30);
-    public static final int YEAR_SECONDS = (MONTH_SECONDS * 12);
+    private static final int MINUTE_SECONDS = 60;
+    private static final int HOUR_SECONDS = 60 * MINUTE_SECONDS;
+    private static final int DAY_SECONDS = (HOUR_SECONDS * 24);
+    private static final int MONTH_SECONDS = (DAY_SECONDS * 30);
+    private static final int YEAR_SECONDS = (MONTH_SECONDS * 12);
 
     private static final String RECENTSEARCH_FILE_KEY = "recent.pref";
-    private static final String SEARCH_PREF_KEY = "searchList";
+    private static final String SEARCHLIST_PREF_KEY = "searchList";
+    private static final String SEARCHCOUNT_PREF_KEY = "searchCount";
 
     private String terms;
     private Date lastSearch;
@@ -55,7 +56,7 @@ public class RecentSearch {
         Gson gson = new Gson();
         SharedPreferences prefs = context.getSharedPreferences(RECENTSEARCH_FILE_KEY,
                 Context.MODE_PRIVATE);
-        String saved = prefs.getString(SEARCH_PREF_KEY, gson.toJson(new RecentSearch[0]));
+        String saved = prefs.getString(SEARCHLIST_PREF_KEY, gson.toJson(new RecentSearch[0]));
 
         Type listType = new TypeToken<ArrayList<RecentSearch>>(){}.getType();
         ArrayList<RecentSearch> savedTerms = gson.fromJson(saved, listType);
@@ -65,23 +66,35 @@ public class RecentSearch {
         savedTerms.add(search); // adds new occurrence with last search date
 
         String json = new Gson().toJson(savedTerms);
-        prefs.edit().putString(SEARCH_PREF_KEY, json).commit();
+        prefs.edit()
+                .putString(SEARCHLIST_PREF_KEY, json)
+                .putInt(SEARCHCOUNT_PREF_KEY, savedTerms.size())
+                .commit();
     }
 
     public static void clearLocal(Context context) {
         SharedPreferences prefs = context.getSharedPreferences(RECENTSEARCH_FILE_KEY,
                 Context.MODE_PRIVATE);
-        prefs.edit().remove(SEARCH_PREF_KEY).commit();
+        prefs.edit()
+                .remove(SEARCHLIST_PREF_KEY)
+                .putInt(SEARCHCOUNT_PREF_KEY, 0)
+                .commit();
     }
 
     public static List<RecentSearch> getStoredLocal(Context context) {
         Gson gson = new Gson();
         SharedPreferences prefs = context.getSharedPreferences(RECENTSEARCH_FILE_KEY,
                 Context.MODE_PRIVATE);
-        String saved = prefs.getString(SEARCH_PREF_KEY, gson.toJson(new RecentSearch[0]));
+        String saved = prefs.getString(SEARCHLIST_PREF_KEY, gson.toJson(new RecentSearch[0]));
 
         Type listType = new TypeToken<ArrayList<RecentSearch>>(){}.getType();
         return gson.fromJson(saved, listType);
+    }
+
+    public static boolean hasRecentSearches(Context context) {
+        SharedPreferences prefs = context.getSharedPreferences(RECENTSEARCH_FILE_KEY,
+                Context.MODE_PRIVATE);
+        return prefs.getInt(SEARCHCOUNT_PREF_KEY, 0) > 0;
     }
 
     @Override
