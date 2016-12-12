@@ -60,15 +60,20 @@ public class Ad {
         this.title = title;
         this.description = description;
 
-        if (!price.contains(SEPARATOR)) { // "100"
-            this.price = price + SEPARATOR + "00";
-        } else if (price.endsWith(SEPARATOR)) { // "100,"
-            this.price = price + "00";
-        } else if (price.indexOf(SEPARATOR) < price.length() - 3) { // "100,0"
-            this.price = price + "0";
-        } else {
-            this.price = price;
+        if(adType == 'd'){
+            this.price = " ";
+        }else{
+            if (!price.contains(SEPARATOR)) { // "100"
+                this.price = price + SEPARATOR + "00";
+            } else if (price.endsWith(SEPARATOR)) { // "100,"
+                this.price = price + "00";
+            } else if (price.indexOf(SEPARATOR) < price.length() - 3) { // "100,0"
+                this.price = price + "0";
+            } else {
+                this.price = price;
+            }
         }
+
 
         this.photoBase64 = "";
         this.filename = "";
@@ -113,6 +118,10 @@ public class Ad {
     }
 
     public String getPrice() {
+        if(adType == 'd'){
+            setPrice(" ");
+            return price;
+        }
         if (!price.contains(SEPARATOR)) { // "100"
             return price + SEPARATOR + "00";
         } else if (price.endsWith(SEPARATOR)) { // "100,"

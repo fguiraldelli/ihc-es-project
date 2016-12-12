@@ -60,4 +60,5 @@
     <string name="tv_message_hint">Escreva aqui sua mensagem...</string>
     <string name="bt_send_label">Enviar</string>
     <string name="tv_messges_header_label">Negociação do anúncio:</string>
+    <string name="space">" "</string>
 </resources>

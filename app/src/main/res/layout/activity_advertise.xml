@@ -107,6 +107,7 @@
                     android:id="@+id/sp_event"
                     android:hint="@string/sp_event"/>
                 <Spinner
+                    android:visibility="invisible"
                     android:layout_width="176dp"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
@@ -121,7 +122,7 @@
                 android:layout_weight="1">
 
                 <EditText
-                    android:layout_width="176dp"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:maxLength="10"
                     android:inputType="numberDecimal"
