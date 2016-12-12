@@ -28,7 +28,7 @@ public abstract class ApiServiceBase {
     protected static final String GET_EXTENSION = ".json";
     protected boolean isMock = false;
     protected RequestQueue queue = null;
-    private Gson gson;
+    protected Gson gson;
 
     public void start(Context context) {
         if (this.queue == null) {

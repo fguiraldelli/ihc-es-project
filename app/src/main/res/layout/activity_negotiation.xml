@@ -56,7 +56,9 @@
             android:id="@+id/tv_messages_ad_title"
             android:textSize="18sp"
             android:textAlignment="center"
-            android:ellipsize="marquee" />
+            android:ellipsize="marquee"
+            android:focusable="true"
+            android:focusableInTouchMode="true" />
 
         <View
             android:layout_width="fill_parent"

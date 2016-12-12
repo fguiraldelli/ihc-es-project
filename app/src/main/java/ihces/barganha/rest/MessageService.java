@@ -1,6 +1,12 @@
 package ihces.barganha.rest;
 
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
+import com.android.volley.toolbox.JsonObjectRequest;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -27,5 +33,42 @@ public class MessageService extends ApiServiceBase {
     @Override
     protected String makeUrl() {
         return BASE_URL + RESOURCE;
+    }
+
+    public void sendMessage(int adId, int senderId, String text,
+                            final ServiceResponseListener<NegotiationMessage> listener) {
+        if (isMock) {
+            listener.onResponse(new NegotiationMessage(10, 1, "hello message!"));
+            return;
+        }
+
+        NegotiationMessage message = new NegotiationMessage(adId, senderId, text);
+
+        JSONObject json = null;
+        try {
+            json = new JSONObject(gson.toJson(message));
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        JsonObjectRequest request = new JsonObjectRequest(
+                makeUrl(),
+                json,
+                new Response.Listener<JSONObject>() {
+                    @Override
+                    public void onResponse(JSONObject response) {
+                        NegotiationMessage oResponse = gson.fromJson(response.toString(), NegotiationMessage.class);
+                        listener.onResponse(oResponse);
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        listener.onError(error);
+                    }
+                }
+        );
+
+        queue.add(request);
     }
 }

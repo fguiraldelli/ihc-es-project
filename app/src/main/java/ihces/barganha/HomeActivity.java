@@ -121,6 +121,7 @@ public class HomeActivity extends AppCompatActivity {
                         } else {
                             User responseUser = response[0];
 
+                            user.setId(responseUser.getId());
                             user.setAds(responseUser.getAds());
                             user.setPoints(responseUser.getPoints());
 
