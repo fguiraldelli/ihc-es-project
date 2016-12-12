@@ -42,7 +42,7 @@ public class Ad {
     @SerializedName("datahoraevento")
     private String eventDateTime;
     @SerializedName("diassemana")
-    private String weekDays;
+    private String weekDays; // "0111110" == seg a sex; weekDays[0] == dom; weekDays[6] == sab;
 
     private String filename = "";
 

@@ -16,9 +16,12 @@ import utils.TimeFormatter;
 public class NegotiationMessage {
 
     private int id;
+    @SerializedName("id_anuncio")
+    private int adId;
     @SerializedName("id_usuario_remetente")
     private int senderId;
-    private transient String senderName;
+    @SerializedName("nome_usuario_remetente")
+    private String senderName;
     @SerializedName("created_at")
     private String createdAt;
     private transient Date messageTime;
@@ -27,8 +30,10 @@ public class NegotiationMessage {
 
     private static DateFormat m_ISO8601Local = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss", Locale.getDefault());
 
-    public NegotiationMessage(int id, int senderId, String messageText) {
-        this.id = id;
+    public NegotiationMessage() {}
+
+    public NegotiationMessage(int adId, int senderId, String messageText) {
+        this.adId = adId;
         this.senderId = senderId;
         this.messageText = messageText;
     }
@@ -76,5 +81,13 @@ public class NegotiationMessage {
 
     public void setMessageText(String messageText) {
         this.messageText = messageText;
+    }
+
+    public int getSenderId() {
+        return senderId;
+    }
+
+    public void setSenderId(int senderId) {
+        this.senderId = senderId;
     }
 }
