@@ -95,10 +95,10 @@ public class MyAdDetails extends AppCompatActivity {
         if (Ad.isMyAdDue(this, ad) || ad.getIsDue()) {
             ad.setIsDue(true);
             trDue.setVisibility(View.VISIBLE);
-            btMarkDue.setVisibility(View.GONE);
+            //btMarkDue.setVisibility(View.GONE);
         } else {
             trDue.setVisibility(View.GONE);
-            btMarkDue.setVisibility(View.VISIBLE);
+            //btMarkDue.setVisibility(View.VISIBLE);
         }
     }
 
@@ -106,21 +106,11 @@ public class MyAdDetails extends AppCompatActivity {
         btMarkDue.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String token = localUser.getAuthToken();
-                adService.markClosed(token, ad, new ServiceResponseListener<String>() {
-                    @Override
-                    public void onResponse(String response) {
-                        ad.setIsDue(true);
-                        Ad.storeMyDueAd(MyAdDetails.this, ad);
-                        setControlVisibility();
-                    }
-
-                    @Override
-                    public void onError(Exception error) {
-                        Log.e("MyAdDetails", "Error setting ad due", error);
-                    }
-                });
-
+                Intent intent = new Intent(MyAdDetails.this, NegotiationActivity.class);
+                intent.putExtra(NegotiationActivity.AD_ID_EXTRA_KEY, ad.getId())
+                        .putExtra(NegotiationActivity.AD_TITLE_EXTRA_KEY, ad.getTitle())
+                        .putExtra(NegotiationActivity.AD_USERID_EXTRA_KEY, ad.getUserId());
+                startActivity(intent);
             }
         });
     }

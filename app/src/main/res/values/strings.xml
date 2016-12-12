@@ -65,4 +65,6 @@
     <string name="bt_commerce">Comércio</string>
     <string name="bt_events">Eventos</string>
     <string name="space">" "</string>
+    <string name="bt_see_contact">Ver Negociações</string>
+    <string name="tv_phone_label">Celular para contato:</string>
 </resources>

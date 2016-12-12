@@ -130,7 +130,7 @@
         </LinearLayout>
 
         <LinearLayout
-            android:orientation="horizontal"
+            android:orientation="vertical"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -138,7 +138,7 @@
             android:layout_marginTop="10dp">
 
             <Button
-                android:text="@string/bt_mark_due_label"
+                android:text="@string/bt_see_contact"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:id="@+id/bt_mark_due"

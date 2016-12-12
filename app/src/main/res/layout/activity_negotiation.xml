@@ -60,12 +60,35 @@
             android:focusable="true"
             android:focusableInTouchMode="true" />
 
+        <TextView
+            android:text="@string/tv_phone_label"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_below="@+id/tv_messages_ad_title"
+            android:id="@+id/tv_phone_label"
+            android:visibility="gone" />
+
+        <TextView
+            android:text="(##)#####-####"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_below="@+id/tv_phone_label"
+            android:id="@+id/tv_phone"
+            android:textSize="18sp"
+            android:textAlignment="center"
+            android:ellipsize="marquee"
+            android:focusable="true"
+            android:focusableInTouchMode="true"
+            android:visibility="gone" />
+
         <View
             android:layout_width="fill_parent"
             android:layout_height="1dp"
             android:background="#cacaca"
             android:id="@+id/item_separator"
-            android:layout_below="@+id/tv_messages_ad_title"
+            android:layout_below="@+id/tv_phone"
             android:layout_margin="10dp" />
 
         <ListView
@@ -110,6 +133,34 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:id="@+id/bt_send" />
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:id="@+id/tr_due"
+                android:orientation="horizontal"
+                android:gravity="center"
+                android:background="@android:color/holo_green_dark"
+                android:padding="4dp"
+                android:visibility="gone">
+
+                <TextView
+                    android:text="@string/tv_negocio_fechado"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/tv_due"
+                    android:textAlignment="center"
+                    android:textColor="@android:color/white"
+                    android:textStyle="bold"
+                    android:textSize="24sp" />
+
+                <ImageView
+                    app:srcCompat="@drawable/handshake_light"
+                    android:id="@+id/iv_due"
+                    android:layout_height="40dp"
+                    android:layout_width="50dp" />
+            </TableRow>
 
         </LinearLayout>
 

@@ -102,8 +102,8 @@ public class AdDetailsActivity extends AppCompatActivity implements View.OnClick
 
     private void setControlVisibility() {
         if (Ad.isContactingAd(this, ad)) {
-            btContact.setVisibility(View.GONE);
-            tvContact.setVisibility(View.VISIBLE);
+            //btContact.setVisibility(View.GONE);
+            //tvContact.setVisibility(View.VISIBLE);
             llEvaluate.setVisibility(View.VISIBLE);
 
             String evaluated = Ad.getEvaluationForAd(AdDetailsActivity.this, ad);
@@ -130,8 +130,8 @@ public class AdDetailsActivity extends AppCompatActivity implements View.OnClick
             }
 
         } else {
-            btContact.setVisibility(View.VISIBLE);
-            tvContact.setVisibility(View.GONE);
+            //btContact.setVisibility(View.VISIBLE);
+            //tvContact.setVisibility(View.GONE);
             llEvaluate.setVisibility(View.GONE);
         }
     }
@@ -172,6 +172,13 @@ public class AdDetailsActivity extends AppCompatActivity implements View.OnClick
         } else if (id == R.id.bt_contact) {
             Ad.storeContactingAd(this, ad);
             setControlVisibility();
+
+            Intent intent = new Intent(AdDetailsActivity.this, NegotiationActivity.class);
+            intent.putExtra(NegotiationActivity.AD_ID_EXTRA_KEY, ad.getId())
+                    .putExtra(NegotiationActivity.AD_TITLE_EXTRA_KEY, ad.getTitle())
+                    .putExtra(NegotiationActivity.AD_USERID_EXTRA_KEY, ad.getUserId())
+                    .putExtra(NegotiationActivity.AD_PHONE_EXTRA_KEY, tvContact.getText().toString());
+            startActivity(intent);
         }
     }
 

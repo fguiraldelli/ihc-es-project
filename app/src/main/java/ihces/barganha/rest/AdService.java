@@ -78,7 +78,7 @@ public class AdService extends ApiServiceBase {
 
         Map<String, String> params = new HashMap<>();
         params.put("id_local", String.valueOf(localId));
-        JsonArrayRequest request = makeGetRequest(makeUrl(BASE_URL + "comercio", params), Ad[].class, listener);
+        JsonArrayRequest request = makeGetRequest(makeUrl(BASE_URL + "comerciolocal", params), Ad[].class, listener);
         queue.add(request);
     }
 
