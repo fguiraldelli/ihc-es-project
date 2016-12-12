@@ -19,6 +19,7 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ImageButton;
@@ -77,6 +78,30 @@ public class AdvertiseActivity extends AppCompatActivity {
         spEventAdapter.setDropDownViewResource(R.layout.spinner_dropdown_item);
         spEvent = (Spinner) findViewById(R.id.sp_event);
         spEvent.setAdapter(spEventAdapter);
+        spEvent.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                if (position == 1){
+                    etPrice.setVisibility(View.GONE);
+                    etPrice.setText(" ");
+                    spWeekDay.setVisibility(view.INVISIBLE);
+                }
+                else if(position == 2){
+                    spWeekDay.setVisibility(view.VISIBLE);
+                    etPrice.setVisibility(View.VISIBLE);
+                }
+                else{
+                    etPrice.setVisibility(View.VISIBLE);
+                    spWeekDay.setVisibility(View.INVISIBLE);
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+                etPrice.setVisibility(View.VISIBLE);
+                spWeekDay.setVisibility(View.INVISIBLE);
+            }
+        });
         eventIds = getResources().getTextArray(R.array.event_ids);
 
         ArrayAdapter spWeekDayAdapter = ArrayAdapter.createFromResource(this,
@@ -111,7 +136,7 @@ public class AdvertiseActivity extends AppCompatActivity {
             public void onClick(final View v) {
                 if (etTitle.getText().length() == 0 ||
                         etDescription.getText().length() == 0 ||
-                        etPrice.getText().length() == 0 ||
+                        (spEvent.getSelectedItemPosition() != 1 && etPrice.getText().length() == 0) ||
                         currentPhotoUri == null) {
                     return;
                 }

@@ -12,14 +12,14 @@
     </integer-array>
     <string-array name="event_names">
         <item>vender</item>
-        <item>doar</item>
-        <item>comercio local</item>
+        <item value="gone">doar</item>
+        <item value="show">comercio local</item>
         <item>evento</item>
     </string-array>
     <string-array name="event_ids"> <!-- Always follow position from string-array "college_names" -->
         <item>c</item> <!-- vender -->
-        <item>d</item> <!-- doar -->
-        <item>l</item> <!-- comercio local -->
+        <item value="gone">d</item> <!-- doar -->
+        <item value="show">l</item> <!-- comercio local -->
         <item>e</item> <!-- evento -->
     </string-array>
     <string-array name="weekday_names">
