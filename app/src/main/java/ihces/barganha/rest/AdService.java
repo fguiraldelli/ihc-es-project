@@ -46,15 +46,39 @@ public class AdService extends ApiServiceBase {
         queue.add(request);
     }
 
-    public void getTrendingAds(int userId, ServiceResponseListener<Ad[]> listener) {
+    public void getTrendingAds(int localId, ServiceResponseListener<Ad[]> listener) {
         if (isMock) {
             listener.onResponse(new Ad [0]);
             return;
         }
 
         Map<String, String> params = new HashMap<>();
-        params.put("id_local", String.valueOf(userId));
+        params.put("id_local", String.valueOf(localId));
         JsonArrayRequest request = makeGetRequest(Ad[].class, listener, params);
+        queue.add(request);
+    }
+
+    public void getEventAds(int localId, ServiceResponseListener<Ad[]> listener) {
+        if (isMock) {
+            listener.onResponse(new Ad [0]);
+            return;
+        }
+
+        Map<String, String> params = new HashMap<>();
+        params.put("id_local", String.valueOf(localId));
+        JsonArrayRequest request = makeGetRequest(makeUrl(BASE_URL + "eventos", params), Ad[].class, listener);
+        queue.add(request);
+    }
+
+    public void getCommerceAds(int localId, ServiceResponseListener<Ad[]> listener) {
+        if (isMock) {
+            listener.onResponse(new Ad [0]);
+            return;
+        }
+
+        Map<String, String> params = new HashMap<>();
+        params.put("id_local", String.valueOf(localId));
+        JsonArrayRequest request = makeGetRequest(makeUrl(BASE_URL + "comercio", params), Ad[].class, listener);
         queue.add(request);
     }
 

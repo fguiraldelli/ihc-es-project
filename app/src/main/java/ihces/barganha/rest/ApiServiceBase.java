@@ -87,7 +87,28 @@ public abstract class ApiServiceBase {
     protected <T> JsonArrayRequest makeGetRequest(final Class<T> outClass,
                                                   final ServiceResponseListener<T> listener,
                                                   Map<String, String> params) {
-        return new JsonArrayRequest(makeUrl(params),
+        return new JsonArrayRequest(makeUrl(makeUrl(), params),
+                new Response.Listener<JSONArray>() {
+                    @Override
+                    public void onResponse(JSONArray response) {
+                        T obj = gson.fromJson(response.toString(), outClass);
+                        listener.onResponse(obj);
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        listener.onError(error);
+                    }
+                }
+        );
+    }
+
+    @NonNull
+    protected <T> JsonArrayRequest makeGetRequest(String url,
+                                                  final Class<T> outClass,
+                                                  final ServiceResponseListener<T> listener) {
+        return new JsonArrayRequest(url,
                 new Response.Listener<JSONArray>() {
                     @Override
                     public void onResponse(JSONArray response) {
@@ -130,9 +151,9 @@ public abstract class ApiServiceBase {
         return makeUrl() + "/" + urlParam;
     }
 
-    protected String makeUrl(Map<String, String> params) {
+    protected String makeUrl(String url, Map<String, String> params) {
         StringBuilder sBuilder = new StringBuilder();
-        sBuilder.append(makeUrl() + GET_EXTENSION);
+        sBuilder.append(url + GET_EXTENSION);
         if (params != null) {
             int i = 0;
             for (Map.Entry<String, String> entry : params.entrySet()) {

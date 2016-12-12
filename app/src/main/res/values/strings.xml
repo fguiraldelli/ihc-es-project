@@ -11,7 +11,9 @@
     <string name="tv_my_points_label">Minha classificação:</string>
     <string name="tv_search_terms_label">Exibindo resultados da pesquisa por:</string>
     <string name="tv_no_results_label">Nenhum resultado encontrado para:</string>
-    <string name="tv_trending_ads_label">Exibindo anúncios em alta</string>
+    <string name="tv_trending_ads_label">Anúncios em alta:</string>
+    <string name="tv_event_ads_label">Próximos eventos:</string>
+    <string name="tv_commerce_ads_label">Comerciantes locais:</string>
     <string name="toast_login_required">É necessário fazer login pela conta do Facebook para usar a aplicação</string>
     <string name="toast_login_error">Houve um problema ao tentar entrar com o Facebook. Tente mais tarde ou entre em contato conosco pela Play Store.</string>
 
@@ -60,4 +62,6 @@
     <string name="tv_message_hint">Escreva aqui sua mensagem...</string>
     <string name="bt_send_label">Enviar</string>
     <string name="tv_messges_header_label">Negociação do anúncio:</string>
+    <string name="bt_commerce">Comércio</string>
+    <string name="bt_events">Eventos</string>
 </resources>

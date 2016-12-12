@@ -39,7 +39,7 @@ public class AutoCompleteSearchAdapter extends ArrayAdapter<String> implements F
 
     @Override
     public String getItem(int index) {
-        return suggestions.get(index);
+        return suggestions.size() > index ? suggestions.get(index) : null;
     }
 
     @Override

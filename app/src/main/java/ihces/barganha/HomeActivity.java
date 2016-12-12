@@ -14,7 +14,6 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Adapter;
 import android.widget.AdapterView;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
@@ -32,13 +31,15 @@ import ihces.barganha.rest.UserService;
 public class HomeActivity extends AppCompatActivity {
 
     private static final int ADVERTISE_REQUEST_CODE = 1000;
+
     AutoCompleteTextView tvSearchTerms;
     Button btSearch;
     Button btAdvertise;
     Button btMyAds;
     Button btRecentSearches;
-    Button btNegotiating;
+    Button btCommerce;
     Button btTrendingAds;
+    Button btEvents;
     TextView tvGreeting;
     UserService service;
     User user;
@@ -70,7 +71,9 @@ public class HomeActivity extends AppCompatActivity {
         tvSearchTerms.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
-                String suggestion = (String) adapterView.getItemAtPosition(position);
+                Object item = adapterView.getItemAtPosition(position);
+                if (item == null) return;
+                String suggestion = (String) item;
                 String contents = spAdapter.getOriginalText();
                 int lastSpace = Math.max(0, contents.lastIndexOf(" ") + 1);
                 String textToSet = contents.substring(0, lastSpace) + suggestion + " ";
@@ -224,11 +227,11 @@ public class HomeActivity extends AppCompatActivity {
             }
         });
 
-        btNegotiating = (Button)findViewById(R.id.btn_my_negotiations);
-        btNegotiating.setOnClickListener(new View.OnClickListener() {
+        btCommerce = (Button)findViewById(R.id.btn_commerce);
+        btCommerce.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(HomeActivity.this, NegotiationActivity.class));
+                openCommerceAdsActivity();
             }
         });
 
@@ -237,6 +240,14 @@ public class HomeActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 openTrendingAdsActivity();
+            }
+        });
+
+        btEvents = (Button)findViewById(R.id.bt_events);
+        btEvents.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                openEventAdsActivity();
             }
         });
     }
@@ -256,7 +267,19 @@ public class HomeActivity extends AppCompatActivity {
 
     private void openTrendingAdsActivity() {
         Intent intent = new Intent(HomeActivity.this, SearchResultsActivity.class);
-        intent.putExtra(SearchResultsActivity.TRENDING_EXTRA_KEY, true);
+        intent.putExtra(SearchResultsActivity.LIST_TYPE_EXTRA_KEY, SearchResultsActivity.ListType.Trending.getValue());
+        startActivity(intent);
+    }
+
+    private void openEventAdsActivity() {
+        Intent intent = new Intent(HomeActivity.this, SearchResultsActivity.class);
+        intent.putExtra(SearchResultsActivity.LIST_TYPE_EXTRA_KEY, SearchResultsActivity.ListType.Events.getValue());
+        startActivity(intent);
+    }
+
+    private void openCommerceAdsActivity() {
+        Intent intent = new Intent(HomeActivity.this, SearchResultsActivity.class);
+        intent.putExtra(SearchResultsActivity.LIST_TYPE_EXTRA_KEY, SearchResultsActivity.ListType.Commerce.getValue());
         startActivity(intent);
     }
 

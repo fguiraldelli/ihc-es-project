@@ -39,22 +39,22 @@
             android:gravity="center">
 
             <Button
-                android:text="@string/bt_saved_label"
+                android:text="@string/bt_events"
                 android:layout_width="@dimen/bt_square_mid"
                 android:layout_height="@dimen/bt_square_mid"
-                android:id="@+id/bt_saved"
+                android:id="@+id/bt_events"
                 android:backgroundTint="@color/colorPrimary"
                 android:textColor="@android:color/white"
-                android:drawablePadding="8dp"
-                android:drawableTop="@drawable/bookmarks"
+                android:drawablePadding="5dp"
+                android:drawableTop="@drawable/events"
                 android:textSize="12sp"
                 android:visibility="visible" />
 
             <Button
-                android:id="@+id/btn_my_negotiations"
-                android:text="@string/bt_negotiating_label"
+                android:id="@+id/btn_commerce"
+                android:text="@string/bt_commerce"
                 android:textColor="@android:color/white"
-                android:drawableTop="@drawable/negotiate"
+                android:drawableTop="@drawable/commerce"
                 android:drawablePadding="5dp"
                 android:backgroundTint="@color/colorPrimary"
                 android:layout_height="@dimen/bt_square_mid"
